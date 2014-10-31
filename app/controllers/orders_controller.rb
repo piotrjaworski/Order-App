@@ -12,8 +12,9 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
+      @order.update_attributes(user_id: current_user.id)
       redirect_to orders_path
-      flash[:success] = 'Twoje zamowienie zostalo zlozone'
+      flash[:success] = 'Twoje zamowienie zostalo zapisane'
     else
       redirect_to orders_path
       flash[:error] = 'Wystapil problem z Twoim zamowieniem'
@@ -29,6 +30,7 @@ class OrdersController < ApplicationController
     @order.update_attributes(order_params)
 
     if @order.save
+      @order.update_attributes(user_id: current_user.id)
       redirect_to orders_path
       flash[:success] = 'Twoje zamowienie zostalo zaktualizowane'
     else

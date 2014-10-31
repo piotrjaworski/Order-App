@@ -3,7 +3,7 @@
     .span10-offset1
       .hero-unit.text-center
         %h1 Orders
-        %p Welcome to zamawiarka app!
+        %p Welcome to the zamawiarka app!
         - if user_signed_in?
           = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
           = link_to 'Wyloguj sie', destroy_user_session_path, class: 'btn btn-success', method: :delete
@@ -26,7 +26,7 @@
             - @orders.each do |order|
               %tr
                 %td= order.short_info
-                %td user
+                %td= order.user.email
                 %td= order.restaurant
                 %td= order.price
                 %td
