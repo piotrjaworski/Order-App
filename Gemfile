@@ -14,6 +14,7 @@ gem 'figaro'
 gem 'binding_of_caller'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 2.3.2.0'
+gem 'pry'
 
 group :development do
   gem 'better_errors'

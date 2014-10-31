@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
 
+  def index
+    @orders = Order.all
+  end
+
   def new
     @order = Order.new
   end
@@ -7,11 +11,11 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    if @oder.save
-      redirect_to root_path
+    if @order.save
+      redirect_to orders_path
       flash[:success] = 'Twoje zamowienie zostalo zlozone'
     else
-      redirect_to root_path
+      redirect_to orders_path
       flash[:error] = 'Wystapil problem z Twoim zamowieniem'
     end
   end
@@ -25,10 +29,10 @@ class OrdersController < ApplicationController
     @order.update_attributes(order_params)
 
     if @order.save
-      redirect_to root_path
+      redirect_to orders_path
       flash[:success] = 'Twoje zamowienie zostalo zaktualizowane'
     else
-      redirect_to root_path
+      redirect_to orders_path
       flash[:error] = 'Wystapil problem z aktualizacja Twojego zamownia'
     end
   end
@@ -36,7 +40,7 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    redirect_to root_path
+    redirect_to orders_path
     flash[:success] = 'Twoje zamowienie zostalo usuniete'
   end
 

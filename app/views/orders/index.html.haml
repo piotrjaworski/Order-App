@@ -1,1 +1,27 @@
-%h1 All orders
+.container
+  .row-fluid
+    .span10-offset1
+      .hero-unit.text-center
+        %h1 Orders
+        %p Welcome to zamawiarka app!
+        = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+      - if @orders.empty?
+        %span.text-warning Nie ma jeszcze zadnych zamowien
+      - else
+        %table.table.table-hover.table-border
+          %thead
+            %tr
+              %th Zamowienie
+              %th Kto zamawial
+              %th Restauracja
+              %th Do zaplaty
+              %th
+          %tbody
+            - @orders.each do |order|
+              %tr
+                %td= order.short_info
+                %td user
+                %td= order.restaurant
+                %td= order.price
+                %td
+#modal.modal.fade
