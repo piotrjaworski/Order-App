@@ -4,7 +4,13 @@
       .hero-unit.text-center
         %h1 Orders
         %p Welcome to zamawiarka app!
-        = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+        - if user_signed_in?
+          = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+          = link_to 'Wyloguj sie', destroy_user_session_path, class: 'btn btn-success', method: :delete
+        - else
+          = link_to 'Zaloguj sie', new_user_session_path, class: 'btn btn-success'
+          = link_to 'Zarejestruj sie', new_user_registration_path, class: 'btn btn-success'
+      = render partial: "shared/flash_messages", flash: flash
       - if @orders.empty?
         %span.text-warning Nie ma jeszcze zadnych zamowien
       - else
