@@ -2,6 +2,13 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+
+    # => count sum
+    sum = []
+    @orders.each do |order|
+      sum << order.price
+    end
+    @sum = sum.inject(:+)
   end
 
   def new
