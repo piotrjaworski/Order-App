@@ -28,7 +28,7 @@
                 %td= order.short_info
                 %td= order.user.email
                 %td= order.restaurant
-                %td= order.price
+                %td= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
                 %td
-        %p.sum= @sum
+        %p.sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
 #modal.modal.fade
