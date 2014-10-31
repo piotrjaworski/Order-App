@@ -30,5 +30,12 @@
                 %td= order.restaurant
                 %td= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
                 %td
-        %p.sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+                  = link_to edit_order_path(order), remote: true do
+                    %i.icon-edit
+                  = link_to order_path(order), remote: true, method: :delete do
+                    %i.icon-remove
+        %p
+          .sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+          .all Razem do zaplaty: &nbsp
+
 #modal.modal.fade
