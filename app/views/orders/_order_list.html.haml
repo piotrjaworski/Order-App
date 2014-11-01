@@ -13,7 +13,10 @@
     %tbody
       - orders.each do |order|
         %tr
-          %td.span3= order.short_info
+          %td.span3
+            = order.short_info
+            - if order.user_id == current_user.id
+              %span.label.label-success Twoje zamowienie
           %td.span2= order.user.name
           %td.span2= order.restaurant
           %td.span1= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")

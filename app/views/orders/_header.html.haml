@@ -1,0 +1,22 @@
+.container
+  .row-fluid
+    .span10-offset1
+      .hero-unit.text-center
+        %h1
+          = link_to 'Orders', orders_path, class: 'main_header'
+        %p Welcome to the zamawiarka app!
+        - if user_signed_in?
+          - if current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
+            = button_to 'Już dzisiaj skladales zamowienie, popraw zlozone', new_order_path, method: :get, class: 'btn btn-primary', remote: true, disabled: true
+          - else
+            = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+          = link_to 'Twoja historia zamowien', orders_history_path, class: 'btn btn-primary'
+          .row
+          %br
+            Zalogowany jako #{current_user.name}
+            %br
+            = image_tag(current_user.photo)
+          %br
+          = link_to 'Wyloguj sie', destroy_user_session_path, class: 'btn btn-success', method: :delete
+        - else
+          = link_to 'Zaloguj się przez Facebook', '/auth/facebook', class: 'btn btn-large btn-primary'

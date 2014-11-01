@@ -50,6 +50,11 @@ class OrdersController < ApplicationController
     sum(@orders)
   end
 
+  def history
+    @user_orders = current_user.orders
+    sum(@user_orders)
+  end
+
   private
 
   def order_params
