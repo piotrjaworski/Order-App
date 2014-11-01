@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = Order.all
+    today_orders
     sum(@orders)
   end
 
@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     @order = Order.create(order_params)
     if @order.save
       @order.update_attributes(user_id: current_user.id)
-      @orders = Order.all
+      today_orders
       sum(@orders)
       render :hide_form
     else
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.save
       @order.update_attributes(order_params)
-      @orders = Order.all
+      today_orders
       sum(@orders)
       render :hide_form
     else
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    @orders = Order.all
+    today_orders
     sum(@orders)
   end
 
@@ -62,6 +62,10 @@ class OrdersController < ApplicationController
       sum << order.price
     end
     @sum = sum.inject(:+)
+  end
+
+  def today_orders
+    @orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
   end
 
 end
