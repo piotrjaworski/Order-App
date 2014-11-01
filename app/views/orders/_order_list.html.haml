@@ -1,0 +1,31 @@
+- if orders.empty?
+  %span.text-warning Nie ma jeszcze zadnych zamowien!
+- else
+  %table.table.table-hover.table-border
+    %thead
+      %tr
+        %th Zamowienie
+        %th Kto zamawial
+        %th Restauracja
+        %th Do zaplaty
+        - if user_signed_in?
+          %th
+    %tbody
+      - orders.each do |order|
+        %tr
+          %td= order.short_info
+          %td= order.user.email
+          %td= order.restaurant
+          %td= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+          - if user_signed_in?
+            %td
+              = link_to order_path(order), remote: true do
+                %i.icon-eye-open
+              - if order.user_id == current_user.id
+                = link_to edit_order_path(order), remote: true do
+                  %i.icon-edit
+                = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Na pewno chcesz usunąć #{order.short_info}?"} do
+                  %i.icon-remove
+  %p
+    .sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+    .all Razem do zaplaty: &nbsp

@@ -10,32 +10,7 @@
         - else
           = link_to 'Zaloguj sie', new_user_session_path, class: 'btn btn-success'
           = link_to 'Zarejestruj sie', new_user_registration_path, class: 'btn btn-success'
-      = render partial: "shared/flash_messages", flash: flash
-      - if @orders.empty?
-        %span.text-warning Nie ma jeszcze zadnych zamowien
-      - else
-        %table.table.table-hover.table-border
-          %thead
-            %tr
-              %th Zamowienie
-              %th Kto zamawial
-              %th Restauracja
-              %th Do zaplaty
-              %th
-          %tbody
-            - @orders.each do |order|
-              %tr
-                %td= order.short_info
-                %td= order.user.email
-                %td= order.restaurant
-                %td= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-                %td
-                  = link_to edit_order_path(order), remote: true do
-                    %i.icon-edit
-                  = link_to order_path(order), remote: true, method: :delete do
-                    %i.icon-remove
-        %p
-          .sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-          .all Razem do zaplaty: &nbsp
-
-#modal.modal.fade
+      = render partial: 'shared/flash_messages', flash: flash
+      #order-list.container
+        = render partial: 'orders/order_list', locals: { orders: @orders }
+      #modal.modal.fade

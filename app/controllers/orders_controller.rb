@@ -2,61 +2,62 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
-
-    # => count sum
-    sum = []
-    @orders.each do |order|
-      sum << order.price
-    end
-    @sum = sum.inject(:+)
+    sum(@orders)
   end
 
   def new
     @order = Order.new
+    render :show_form
   end
 
   def create
-    @order = Order.new(order_params)
-
+    @order = Order.create(order_params)
     if @order.save
       @order.update_attributes(user_id: current_user.id)
-      redirect_to orders_path
-      flash[:success] = 'Twoje zamowienie zostalo zapisane'
+      @orders = Order.all
+      sum(@orders)
+      render :hide_form
     else
-      redirect_to orders_path
-      flash[:error] = 'Wystapil problem z Twoim zamowieniem'
+      render :show_form
     end
   end
 
   def edit
     @order = Order.find(params[:id])
+    render :show_form
   end
 
   def update
     @order = Order.find(params[:id])
-    @order.update_attributes(order_params)
-
     if @order.save
-      @order.update_attributes(user_id: current_user.id)
-      redirect_to orders_path
-      flash[:success] = 'Twoje zamowienie zostalo zaktualizowane'
+      @order.update_attributes(order_params)
+      @orders = Order.all
+      sum(@orders)
+      render :hide_form
     else
-      redirect_to orders_path
-      flash[:error] = 'Wystapil problem z aktualizacja Twojego zamownia'
+      render :show_form
     end
   end
 
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    redirect_to orders_path
-    flash[:success] = 'Twoje zamowienie zostalo usuniete'
+    @orders = Order.all
+    sum(@orders)
   end
 
   private
 
   def order_params
     params.require(:order).permit(:short_info, :price, :user_id, :restaurant)
+  end
+
+  def sum(object)
+    sum = []
+    object.each do |order|
+      sum << order.price
+    end
+    @sum = sum.inject(:+)
   end
 
 end

@@ -1,6 +1,7 @@
 .modal-header
-  %h1 Nowe zamowienie
-= simple_form_for @order, class: 'clearfix' do |f|
+  %h1
+    = order.new_record? ? "Nowe zamowienie" : "Edytuj #{order.short_info}"
+= simple_form_for order, class: 'clearfix', remote: true do |f|
   .modal-body
     = f.input :short_info, input_html: { class: 'form-control' }, label: 'Zamowienie'
     = f.input :restaurant, input_html: { class: 'form-control' }, label: 'Restauracja', collection: Order::RESTAURANT
