@@ -4,21 +4,21 @@
   %table.table.table-hover.table-border
     %thead
       %tr
-        %th Zamowienie
-        %th Kto zamawial
-        %th Restauracja
-        %th Do zaplaty
+        %th.span3 Zamowienie
+        %th.span2 Kto zamawial
+        %th.span2 Restauracja
+        %th.span1 Do zaplaty
         - if user_signed_in?
-          %th
+          %th.span1
     %tbody
       - orders.each do |order|
         %tr
-          %td= order.short_info
-          %td= order.user.email
-          %td= order.restaurant
-          %td= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+          %td.span3= order.short_info
+          %td.span2= order.user.name
+          %td.span2= order.restaurant
+          %td.span1= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
           - if user_signed_in?
-            %td
+            %td.span1
               = link_to order_path(order), remote: true do
                 %i.icon-eye-open
               - if order.user_id == current_user.id

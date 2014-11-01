@@ -5,11 +5,18 @@
         %h1 Orders
         %p Welcome to the zamawiarka app!
         - if user_signed_in?
-          = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+          - if current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
+            = button_to 'Już dzisiaj skladales zamowienie, popraw zlozone', new_order_path, method: :get, class: 'btn btn-primary', remote: true, disabled: true
+          - else
+            = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
           = link_to 'Wyloguj sie', destroy_user_session_path, class: 'btn btn-success', method: :delete
+          .row
+          %br
+            Zalogowany jako #{current_user.name}
+            %br
+            = image_tag(current_user.photo)
         - else
-          = link_to 'Zaloguj sie', new_user_session_path, class: 'btn btn-success'
-          = link_to 'Zarejestruj sie', new_user_registration_path, class: 'btn btn-success'
+          = link_to 'Zaloguj się przez Facebook', '/auth/facebook', class: 'btn btn-large btn-primary'
       = render partial: 'shared/flash_messages', flash: flash
       #order-list.container
         = render partial: 'orders/order_list', locals: { orders: @orders }
