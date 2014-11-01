@@ -1,0 +1,11 @@
+.modal-header
+  %h1
+    = order.short_info
+= simple_form_for order, class: 'clearfix', remote: true do |f|
+  .modal-body
+    = f.input :short_info, input_html: { class: 'form-control', readonly: true }, label: 'Zamowienie'
+    = f.input :restaurant, input_html: { class: 'form-control', disabled: true }, label: 'Restauracja', collection: Order::RESTAURANT
+    = f.input :price, input_html: { class: 'form-control', readonly: true }, label: 'Cena'
+  .modal-footer
+    = f.submit 'Zamow', class: 'btn btn-primary', disabled: true
+
