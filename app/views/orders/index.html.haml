@@ -1,5 +1,6 @@
 = render partial: 'orders/header'
-= render partial: 'shared/flash_messages', flash: flash
+.container
+  = render partial: 'shared/flash_messages', flash: flash
 #order-list.container
   = render partial: 'orders/order_list', locals: { orders: @orders }
 #modal.modal.fade

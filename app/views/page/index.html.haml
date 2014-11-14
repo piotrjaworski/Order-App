@@ -1,14 +1,18 @@
-.header#home
+#home.header
   .container
     .logo
-    .menu
-      %ul.menu-top
-        %li
-        %li
-        %li
-          .main
-            %section
-      #small-dialog.mfp-hide
-        .login
-      #small-dialog1.mfp-hide
-        .signup
+      = image_tag('logo.png')
+    / .menu
+    /   %ul.menu-top
+    /     %li
+    /       = link_to 'Log in', '#small-dialog', class: 'play-icon popup-with-zoom-anim'
+    /     %li
+    /       = link_to 'Sign up', '#small-dialog1', class: 'play-icon popup-with-zoom-anim'
+    /     %li
+    /       .main
+    /         %section
+    /           %button#showRight.navig
+    #small-dialog.mfp-hide
+      .login
+    #small-dialog1.mfp-hide
+      .signup

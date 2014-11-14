@@ -1,13 +1,13 @@
 - if orders.empty?
-  %span.text-warning Nie ma jeszcze zadnych zamowien!
+  %span.text-warning There are no orders!
 - else
   %table.table.table-hover.table-border
     %thead
       %tr
-        %th.span3 Zamowienie
-        %th.span2 Kto zamawial
-        %th.span2 Restauracja
-        %th.span1 Do zaplaty
+        %th.span3 Order
+        %th.span2 Who ordered
+        %th.span2 Restaurant
+        %th.span1 To pay
         - if user_signed_in?
           %th.span1
     %tbody
@@ -17,7 +17,7 @@
             = order.short_info
             - if user_signed_in?
               - if order.user_id == current_user.id
-                %span.label.label-success Twoje zamowienie
+                %span.label.label-success Your order
           %td.span2= order.user.name
           %td.span2= order.restaurant
           %td.span1= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
@@ -32,4 +32,4 @@
                   %i.icon-remove
   %p
     .sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-    .all Razem do zaplaty: &nbsp
+    .all To pay: &nbsp

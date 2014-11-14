@@ -7,16 +7,17 @@
         %p Welcome to the zamawiarka app!
         - if user_signed_in?
           - if current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
-            = button_to 'Już dzisiaj skladales zamowienie, popraw zlozone', new_order_path, method: :get, class: 'btn btn-primary', remote: true, disabled: true
+            = button_to 'You ordered today! Please edit or delete your order!', new_order_path, method: :get, class: 'btn btn-primary', remote: true, disabled: true
           - else
-            = button_to 'Dodaj zamowienie', new_order_path, method: :get, class: 'btn btn-primary', remote: true
-          = link_to 'Twoja historia zamowien', orders_history_path, class: 'btn btn-primary'
+            = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+          = link_to 'Your orders history', orders_history_path, class: 'btn btn-primary'
+          = link_to 'Add new restaurant', new_order_path, class: 'btn btn-primary', remote: true
           .row
           %br
-            Zalogowany jako #{current_user.name}
+            Logged as #{current_user.name}
             %br
             = image_tag(current_user.photo)
           %br
-          = link_to 'Wyloguj sie', destroy_user_session_path, class: 'btn btn-success', method: :delete
+          = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-success', method: :delete
         - else
-          = link_to 'Zaloguj się przez Facebook', '/auth/facebook', class: 'btn btn-large btn-primary'
+          = link_to 'Log in via facebook', '/auth/facebook', class: 'btn btn-large btn-primary'
