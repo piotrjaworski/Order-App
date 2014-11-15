@@ -4,14 +4,11 @@
       .hero-unit.text-center
         %h1
           = link_to 'Orders', orders_path, class: 'main_header'
-        %p Welcome to the zamawiarka app!
+        %p Welcome to the order app!
         - if user_signed_in?
-          - if current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
-            = button_to 'You ordered today! Please edit or delete your order!', new_order_path, method: :get, class: 'btn btn-primary', remote: true, disabled: true
-          - else
-            = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+          = button_to 'Today orders', orders_path, class: 'btn btn-primary', method: :get
           = link_to 'Your orders history', orders_history_path, class: 'btn btn-primary'
-          = link_to 'Add new restaurant', new_order_path, class: 'btn btn-primary', remote: true
+          = link_to 'Restaurants', restaurants_path, class: 'btn btn-primary'
           .row
           %br
             Logged as #{current_user.name}

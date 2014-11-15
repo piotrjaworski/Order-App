@@ -1,0 +1,20 @@
+.container
+  .row-fluid
+    .span10-offset1
+      .hero-unit.text-center
+        %h1
+          = link_to 'Orders', orders_path, class: 'main_header'
+        %p Welcome to the order app!
+        - if user_signed_in?
+          = button_to 'Add new restaurant', new_restaurant_path, method: :get, class: 'btn btn-primary', remote: true
+          = link_to 'Your orders history', orders_history_path, class: 'btn btn-primary'
+          = link_to 'Restaurants', restaurants_path, class: 'btn btn-primary'
+          .row
+          %br
+            Logged as #{current_user.name}
+            %br
+            = image_tag(current_user.photo)
+          %br
+          = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-success', method: :delete
+        - else
+          = link_to 'Log in via facebook', '/auth/facebook', class: 'btn btn-large btn-primary'

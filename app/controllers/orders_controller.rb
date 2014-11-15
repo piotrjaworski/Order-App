@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @restaurants = Restaurant.all
     render :show_form
   end
 
@@ -25,6 +26,7 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @restaurants = Restaurant.all
     render :show_form
   end
 
@@ -42,6 +44,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @restaurants = Restaurant.all
   end
 
   def destroy
@@ -59,7 +62,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:short_info, :price, :user_id, :restaurant)
+    params.require(:order).permit(:short_info, :price, :user_id, :restaurant_id)
   end
 
   def sum(object)

@@ -1,0 +1,6 @@
+= render partial: 'header'
+.container
+  = render partial: 'shared/flash_messages', flash: flash
+#restaurant-list.container
+  = render partial: 'restaurants_list', locals: { restaurants: @restaurants }
+#modal.modal.fade

@@ -1,0 +1,3 @@
+m = $('#modal');
+m.html('<%= j(render partial: 'show_restaurant', locals: {restaurant: @restaurant}) %>');
+m.modal('show');
