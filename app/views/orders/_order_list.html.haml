@@ -22,7 +22,8 @@
           - if order.restaurant
             %td.span2= order.restaurant.name
           - else
-            %td.span2 Restaurant which has been deleted!
+            %td.span2
+              %span.error Restaurant which has been deleted!
           %td.span1= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
           - if user_signed_in?
             %td.span1
