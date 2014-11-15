@@ -2,8 +2,19 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
+    # => for Prawn pdf
+    @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
+
     today_orders
     sum(@orders)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = OrderPdf.new(@today_orders)
+        send_data pdf.render, filename: "Today_orders_raport.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   def new

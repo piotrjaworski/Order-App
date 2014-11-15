@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 gem 'rails', '4.1.4'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
@@ -16,6 +17,9 @@ gem 'simple_form'
 gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'pry'
 gem 'omniauth-facebook'
+gem 'prawn'
+
+gem 'rubocop', require: false
 
 group :development do
   gem 'better_errors'
@@ -34,6 +38,4 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 
