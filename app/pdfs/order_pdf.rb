@@ -9,7 +9,7 @@ class OrderPdf < Prawn::Document
     line_items
     move_down 10
     fill_color "ff0000"
-    text "Total to pay: " + sum(all_orders).to_s
+    text "Total to pay: " + sum(all_orders).to_s + " zl", size: 18, style: :bold
     move_down 20
     fill_color "0000ff"
     text date.strftime("Raport generated at %F %I:%M%p")
@@ -17,7 +17,12 @@ class OrderPdf < Prawn::Document
 
   def line_items
     move_down 20
-    table line_item_rows
+    table line_item_rows do
+      row(0).font_style = :bold
+      columns(1..3).align = :right
+      self.row_colors = ["DDDDDD", "FFFFFF"]
+      self.header = true
+    end
   end
 
   def line_item_rows
