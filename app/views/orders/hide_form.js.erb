@@ -1,2 +1,3 @@
+$('#header-main').html('<%= j(render partial: 'shared/header') %>');
 $('#order-list').html('<%= j(render partial: 'orders/order_list', locals: { orders: @orders })%>');
 $('#modal').modal('hide');
