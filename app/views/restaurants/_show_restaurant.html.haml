@@ -1,0 +1,11 @@
+.modal-header
+  %h1
+    = restaurant.new_record? ? "New restaurant" : "Edit #{restaurant.name}"
+= simple_form_for restaurant, class: 'clearfix', remote: true do |f|
+  .modal-body
+    = f.input :name, input_html: { class: 'form-control' }, label: 'Name'
+    = f.input :short_info, input_html: { class: 'form-control' }, label: 'Short info'
+    = f.input :restaurant_type, input_html: { class: 'form-control' }, label: 'Type'
+  .modal-footer
+    = f.submit 'Confirm', class: 'btn btn-primary'
+

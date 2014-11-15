@@ -1,11 +1,13 @@
-.modal-header
-  %h1
-    = restaurant.new_record? ? "New restaurant" : "Edit #{restaurant.short_info}"
-= simple_form_for restaurant, class: 'clearfix', remote: true do |f|
-  .modal-body
-    = f.input :name, input_html: { class: 'form-control' }, label: 'Name'
-    = f.input :short_info, input_html: { class: 'form-control' }, label: 'Short info'
-    = f.input :restaurant_type, input_html: { class: 'form-control' }, label: 'Type'
-  .modal-footer
-    = f.submit 'restaurant', class: 'btn btn-primary'
+#google-address{:onmouseover => "initialize()"}
+  .modal-header
+    %h1
+      = restaurant.new_record? ? "New restaurant" : "Edit #{restaurant.name}"
+  = simple_form_for restaurant, class: 'clearfix', remote: true do |f|
+    .modal-body
+      = f.input :name, input_html: { class: 'form-control' }, label: 'Name'
+      = f.input :short_info, input_html: { class: 'form-control' }, label: 'Short info'
+      = f.input :restaurant_type, input_html: { class: 'form-control' }, label: 'Type', collection: Restaurant::TYPES
+      = f.input :address, label: 'Address', input_html: { id: "autocomplete", placeholder: "Enter an address"}
+    .modal-footer
+      = f.submit 'Confirm', class: 'btn btn-primary'
 
