@@ -14,12 +14,7 @@
           = link_to 'Restaurants', restaurants_path, class: 'btn btn-primary'
           .row
           %br
-            Logged as #{current_user.name}
-            %br
-            - if current_user.photo
-              = image_tag(current_user.photo)
-            - else
-              = image_tag(avatar_url(current_user))
+            = render 'shared/avatar'
           %br
           = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-success', method: :delete
         - else

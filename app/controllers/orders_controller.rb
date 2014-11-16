@@ -1,13 +1,11 @@
 class OrdersController < ApplicationController
-  helper_method :show_products, :count_price, :count_today_price
+  helper_method :show_products, :count_price, :count_total_price
   before_action :authenticate_user!, except: :index
 
   def index
     # => for Prawn pdf
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-
     today_orders
-    #sum(@orders)
 
     respond_to do |format|
       format.html
@@ -28,9 +26,8 @@ class OrdersController < ApplicationController
     @order = Order.create(order_params)
     if @order.save
       @order.update_attributes(user_id: current_user.id)
-
       today_orders
-      count_today_price(today_orders)
+      @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
       render :hide_form
     else
       render :show_form
@@ -48,6 +45,7 @@ class OrdersController < ApplicationController
     if @order.save
       @order.update_attributes(order_params)
       today_orders
+      @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
       count_today_price(today_orders)
       render :hide_form
     else
@@ -64,16 +62,16 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.destroy
     today_orders
-    count_today_price(today_orders)
+    @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def history
     @user_orders = current_user.orders
-    #sum(@user_orders)
   end
 
   private
 
+  # => to edit this permit!
   def order_params
     params.require(:order).permit!
   end
@@ -86,7 +84,7 @@ class OrdersController < ApplicationController
     @sum = sum.inject(:+)
   end
 
-  def count_today_price(objects)
+  def count_total_price(objects)
     today_sum = []
     objects.each do |order|
       order.products.each do |product|

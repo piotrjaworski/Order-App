@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def link_to_add_products(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -13,4 +14,5 @@ module ApplicationHelper
     gravatar_id = Digest::MD5::hexdigest(user.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=50d=#{CGI.escape(default_url)}"
   end
+
 end

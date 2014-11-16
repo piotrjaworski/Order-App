@@ -12,13 +12,13 @@
       %tbody
         - current_user.orders.each do |order|
           %tr
-            %td.span3= order.short_info
+            %td.span3= show_products(order)
             - if order.restaurant
               %td.span3= order.restaurant.name
             - else
               %td.span3
                 %span.error Restaurant which has been deleted!
-            %td.span3= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+            %td.span3= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
     %p
-      .sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+      .sum= number_to_currency(count_total_price(@user_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
       .all Razem wydales: &nbsp

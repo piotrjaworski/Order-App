@@ -11,9 +11,7 @@
           = link_to 'Your orders history', orders_history_path, class: 'btn btn-primary'
           .row
           %br
-            Logged as #{current_user.name}
-            %br
-            = image_tag(current_user.photo)
+            = render 'shared/avatar'
           %br
           = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-success', method: :delete
         - else

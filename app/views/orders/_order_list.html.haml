@@ -35,6 +35,6 @@
                 = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{order.short_info}?"} do
                   %i.icon-remove
   %p
-    .sum= number_to_currency(count_today_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+    .sum= number_to_currency(count_total_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
     .all To pay: &nbsp
-  = link_to "Generate Orders as PDF", orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger'
+  = link_to "Generate Orders as PDF", orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger', target: "_blank"

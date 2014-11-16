@@ -5,14 +5,14 @@ class OrderPdf < Prawn::Document
     @today_orders = today_orders
     all_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     date = DateTime.now
-    text date.strftime("Order from %F")
+    text date.strftime("Order from %F"), style: :bold
     line_items
-    move_down 10
+    move_down 14
     fill_color "ff0000"
-    text "Total to pay: " + sum(all_orders).to_s + " zl", size: 18, style: :bold
+    text "Total to pay: " + count_total_price(all_orders).to_s + " zl", size: 18, style: :bold
     move_down 20
     fill_color "0000ff"
-    text date.strftime("Raport generated at %F %I:%M%p")
+    text date.strftime("Raport generated at %F %I:%M%p"), size: 10
   end
 
   def line_items
@@ -29,20 +29,21 @@ class OrderPdf < Prawn::Document
     [["ID", "Order", "Who ordered", "Restaurant", "Price"]] +
     @today_orders.map do |order|
       if order.restaurant
-        [order.id, order.short_info, order.user.name, order.restaurant.name, order.price]
+        [order.id, order.products.map(&:name).join(", "), order.user.name, order.restaurant.name, order.products.map(&:price).inject(:+)]
       else
-        [order.id, order.short_info, order.user.name, 'There is no restaurant', order.price]
+        [order.id, order.products.map(&:name).join(", "), order.user.name, 'There is no restaurant', order.products.map(&:price).inject(:+)]
       end
     end
   end
 
-  def sum(object)
-    sum = []
-    object.each do |order|
-      sum << order.price
+  def count_total_price(objects)
+    today_sum = []
+    objects.each do |order|
+      order.products.each do |product|
+        today_sum << product.price
+      end
     end
-    @sum = sum.inject(:+)
-
+    @today_sum = today_sum.inject(:+)
   end
 
 end
