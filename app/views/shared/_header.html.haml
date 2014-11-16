@@ -16,7 +16,10 @@
           %br
             Logged as #{current_user.name}
             %br
-            = image_tag(current_user.photo)
+            - if current_user.photo
+              = image_tag(current_user.photo)
+            - else
+              = image_tag(avatar_url(current_user))
           %br
           = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-success', method: :delete
         - else

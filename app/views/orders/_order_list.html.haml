@@ -14,7 +14,7 @@
       - orders.each do |order|
         %tr
           %td.span3
-            = order.short_info
+            = show_products(order)
             - if user_signed_in?
               - if order.user_id == current_user.id
                 %span.label.label-success Your order
@@ -24,7 +24,7 @@
           - else
             %td.span2
               %span.error Restaurant which has been deleted!
-          %td.span1= number_to_currency(order.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+          %td.span1= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
           - if user_signed_in?
             %td.span1
               = link_to order_path(order), remote: true do
@@ -35,6 +35,6 @@
                 = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{order.short_info}?"} do
                   %i.icon-remove
   %p
-    .sum= number_to_currency(@sum, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+    .sum= number_to_currency(count_today_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
     .all To pay: &nbsp
   = link_to "Generate Orders as PDF", orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger'
