@@ -1,11 +1,24 @@
 .modal-header
   %h1
-    = order.short_info
-= simple_form_for order, class: 'clearfix', remote: true do |f|
-  .modal-body
-    = f.input :short_info, input_html: { class: 'form-control', readonly: true }, label: 'Zamowienie'
-    = f.input :restaurant_id, input_html: { class: 'form-control', disabled: true, value: @order.restaurant.name }, label: 'Restauracja'
-    = f.input :price, input_html: { class: 'form-control', readonly: true }, label: 'Cena'
-  .modal-footer
-    = f.submit 'Zamow', class: 'btn btn-primary', disabled: true
+    Order #
+    = order.id
+.modal-body
+  %p
+    %span.bold Who ordered:
+    = order.user.name
+  %p
+    %span.bold Restaurant:
+    = order.restaurant.name
+  %p
+    %h4 Products:
+    - order.products.each do |product|
+      \-
+      %span.bold= product.name
+      \-
+      %span.error= number_to_currency(product.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+      %br
+.modal-footer
+  %h3
+    Total to pay:
+    %span.error= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
 
