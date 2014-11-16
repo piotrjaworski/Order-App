@@ -37,4 +37,10 @@
   %p
     .sum= number_to_currency(count_total_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
     .all To pay: &nbsp
+    %br
+    %br
+    / TODO
+    = link_to "Call and order now!", '#', class: 'btn btn-success order-now', data: { confirm: "Are you sure that you want to call and order today?"}
+    %br
+    = link_to "I collect today money!", '#', class: 'btn btn-success collect-money', data: { confirm: "Are you sure that you want to collect money today?"}
   = link_to "Generate Orders as PDF", orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger', target: "_blank"
