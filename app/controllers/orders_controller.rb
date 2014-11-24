@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   def index
     # => for Prawn pdf
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
+    @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
     today_orders
 
     respond_to do |format|
@@ -27,6 +28,7 @@ class OrdersController < ApplicationController
     if @order.save
       @order.update_attributes(user_id: current_user.id)
       today_orders
+      @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
       render :hide_form
     else
@@ -45,8 +47,9 @@ class OrdersController < ApplicationController
     if @order.save
       @order.update_attributes(order_params)
       today_orders
+      @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-      count_today_price(today_orders)
+      count_total_price(today_orders)
       render :hide_form
     else
       render :show_form

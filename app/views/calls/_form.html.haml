@@ -1,0 +1,8 @@
+.modal-header
+  %h1 Call and Order now!
+= simple_form_for call, class: 'clearfix', remote: true do |f|
+  .modal-body
+    = f.input :delivery_time, input_html: { class: 'form-control' }, label: 'Estimated delivery time (in minutes)'
+  .modal-footer
+    = f.submit 'Order', class: 'btn btn-primary'
+

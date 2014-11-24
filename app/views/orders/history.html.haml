@@ -6,9 +6,9 @@
     %table.table.table-hover.table-border
       %thead
         %tr
-          %th.span3 Zamowienie
-          %th.span3 Restauracja
-          %th.span3 Do zaplaty
+          %th.span3 Order
+          %th.span3 Restaurant
+          %th.span3 To pay
       %tbody
         - current_user.orders.each do |order|
           %tr
@@ -21,4 +21,4 @@
             %td.span3= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
     %p
       .sum= number_to_currency(count_total_price(@user_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-      .all Razem wydales: &nbsp
+      .all Total you spend: &nbsp

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :restaurants
+  has_many :calls
+  has_many :collects
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
