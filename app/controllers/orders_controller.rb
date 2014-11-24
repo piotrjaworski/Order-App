@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
     today_orders
-
+    #binding.pry
     respond_to do |format|
       format.html
       format.pdf do
