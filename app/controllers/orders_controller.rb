@@ -4,8 +4,9 @@ class OrdersController < MethodsController
     # => for Prawn pdf
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
     today_orders
-    #binding.pry
+
     respond_to do |format|
       format.html
       format.pdf do
@@ -28,6 +29,7 @@ class OrdersController < MethodsController
       today_orders
       @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
+      @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
       render :hide_form
     else
       render :show_form
@@ -47,6 +49,7 @@ class OrdersController < MethodsController
       today_orders
       @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
+      @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
       count_total_price(today_orders)
       render :hide_form
     else
@@ -64,6 +67,7 @@ class OrdersController < MethodsController
     @order.destroy
     today_orders
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
+    @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def history

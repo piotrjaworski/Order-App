@@ -18,12 +18,6 @@ class CallsController < MethodsController
     end
   end
 
-  def destroy
-    @call = Call.last
-    @call.destroy
-    redirect_to root_path
-  end
-
   private
 
   def call_params
