@@ -72,13 +72,7 @@ class OrdersController < MethodsController
 
   def history
     @user_orders = current_user.orders
-    @user_orders_paginate = @user_orders.order("updated_at DESC").paginate(page: params[:page], per_page: 2)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @user_orders }
-      format.js
-    end
+    @user_orders_paginate = @user_orders.order("updated_at DESC").paginate(page: params[:page], per_page: 5)
   end
 
   private

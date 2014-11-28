@@ -7,4 +7,6 @@
     %script{:src => "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"}
     = csrf_meta_tags
   %body
+    #navbar-main
+      = render partial: 'shared/navbar'
     = yield

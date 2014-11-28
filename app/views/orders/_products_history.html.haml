@@ -3,12 +3,15 @@
     - if @user_orders_paginate.empty?
       %span.text-warning There are no orders!
     - else
+      %h2.text-center Your last orders
+      %br
       %table.table.table-hover.table-border
         %thead
           %tr
             %th.span3 Order
             %th.span3 Restaurant
-            %th.span3 To pay
+            %th.span2 To pay
+            %th.span2 Date
         %tbody
           - @user_orders_paginate.each do |order|
             %tr
@@ -18,11 +21,12 @@
               - else
                 %td.span3
                   %span.error Restaurant which has been deleted!
-              %td.span3= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+              %td.span2= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+              %td.span2= order.created_at.strftime("%d/%m/%Y at %T")
       .row
         %p
           .sum= number_to_currency(count_total_price(@user_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
           .all Total you spend: &nbsp
       .row
         .text-center.pagination
-          = will_paginate @user_orders_paginate
+          = will_paginate @user_orders_paginate, renderer: BootstrapPagination::Rails, previous_label: "← Newer", next_label: "Older →"

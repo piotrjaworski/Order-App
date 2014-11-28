@@ -1,0 +1,41 @@
+.navbar.navbar-inverse
+  .navbar-inner
+    .container{:style => "width: auto;"}
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .brand OrderApp
+      .nav-collapse
+        %ul.nav
+          %li.active
+            = link_to "Home", root_path
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Orders
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                = link_to 'Today orders', orders_path
+              %li
+                %a{:href => "#"} Another action
+              %li.divider
+              %li
+                = link_to 'Your orders history', orders_history_path
+        %form.navbar-search.pull-left{:action => ""}
+          %input.search-query.span2{:placeholder => "Search", :type => "text"}
+        %ul.nav.pull-right
+          %li
+            = link_to "Logged as #{current_user.name}"
+          %li.divider-vertical
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Profile
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"} Lorem ipsum
+              %li.divider
+              %li
+                = link_to 'Sign out', destroy_user_session_path, method: :delete
+
