@@ -1,24 +1,7 @@
+:javascript
+  $(function(){
+     $('.pagination a').attr('data-remote', 'true')
+  });
+
 = render partial: 'header_history'
-.container
-  - if current_user.orders.empty?
-    %span.text-warning There are no orders!
-  - else
-    %table.table.table-hover.table-border
-      %thead
-        %tr
-          %th.span3 Order
-          %th.span3 Restaurant
-          %th.span3 To pay
-      %tbody
-        - current_user.orders.each do |order|
-          %tr
-            %td.span3= show_products(order)
-            - if order.restaurant
-              %td.span3= order.restaurant.name
-            - else
-              %td.span3
-                %span.error Restaurant which has been deleted!
-            %td.span3= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-    %p
-      .sum= number_to_currency(count_total_price(@user_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-      .all Total you spend: &nbsp
+= render partial: 'products_history'
