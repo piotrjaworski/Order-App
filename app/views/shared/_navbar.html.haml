@@ -1,4 +1,4 @@
-.navbar.navbar-inverse
+.navbar
   .navbar-inner
     .container{:style => "width: auto;"}
       %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
@@ -8,7 +8,7 @@
       .brand OrderApp
       .nav-collapse
         %ul.nav
-          %li.active
+          %li
             = link_to "Home", root_path
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -18,24 +18,40 @@
               %li
                 = link_to 'Today orders', orders_path
               %li
-                %a{:href => "#"} Another action
-              %li.divider
-              %li
-                = link_to 'Your orders history', orders_history_path
+                = link_to 'Order stats', '#'
+              - if user_signed_in?
+                %li.divider
+                %li
+                  = link_to 'Your orders history', orders_history_path
+          %li.dropdown
+            = link_to 'Restaurants', restaurants_path
         %form.navbar-search.pull-left{:action => ""}
           %input.search-query.span2{:placeholder => "Search", :type => "text"}
-        %ul.nav.pull-right
-          %li
-            = link_to "Logged as #{current_user.name}"
-          %li.divider-vertical
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Profile
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{:href => "#"} Lorem ipsum
-              %li.divider
-              %li
-                = link_to 'Sign out', destroy_user_session_path, method: :delete
+        - if user_signed_in?
+          %ul.nav.pull-right
+            %li
+              = link_to "Logged as #{current_user.name}", '#'
+            %li.divider-vertical
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Profile
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "#"} Lorem ipsum
+                %li.divider
+                %li
+                  = link_to 'Sign out', destroy_user_session_path, method: :delete
+        - else
+          %ul.nav.pull-right
+            %li
+              = link_to "Sign in", new_user_session_path
+            %li
+              = link_to "Sign up", new_user_registration_path
+            %li
+              %a{:href => "/auth/facebook"}
+                %button.btn.btn-facebook.btn-small.btn-margin
+                  %i.fa.fa-facebook
+                  | Connect with Facebook
+
 

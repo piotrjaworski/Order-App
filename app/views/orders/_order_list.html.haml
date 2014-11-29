@@ -1,7 +1,7 @@
 - if orders.empty?
   %span.text-warning There are no orders!
 - else
-  %table.table.table-hover.table-border
+  %table.table.table-bordered.table-striped.table-hover
     %thead
       %tr
         %th.span3 Order
@@ -9,7 +9,7 @@
         %th.span2 Restaurant
         %th.span1 To pay
         - if user_signed_in?
-          %th.span1
+          %th.span1 Actions
     %tbody
       - orders.each do |order|
         %tr
@@ -28,12 +28,12 @@
           - if user_signed_in?
             %td.span1
               = link_to order_path(order), remote: true do
-                %i.icon-eye-open
+                = fa_icon "book"
               - if order.user_id == current_user.id
                 = link_to edit_order_path(order), remote: true do
-                  %i.icon-edit
+                  = fa_icon "edit"
                 = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{order.short_info}?"} do
-                  %i.icon-remove
+                  = fa_icon "trash"
   %p
     .sum= number_to_currency(count_total_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
     .all To pay: &nbsp

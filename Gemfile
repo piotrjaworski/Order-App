@@ -19,6 +19,7 @@ gem 'pry'
 gem 'omniauth-facebook'
 gem 'prawn'
 gem 'will_paginate-bootstrap'
+gem 'font-awesome-rails'
 
 gem 'rubocop', require: false
 

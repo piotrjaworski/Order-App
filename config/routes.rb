@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :orders
   resources :restaurants
-  resources :calls, only: [:new, :create]
+  resources :calls, only: [:create]
   resources :collects, only: [:new, :create]
 
   get 'auth/:provider/callback', to: 'sessions#create'

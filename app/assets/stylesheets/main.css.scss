@@ -1,0 +1,74 @@
+.btn-margin {
+  margin-top: -7px !important;
+}
+
+.badge-success {
+  background-color: #3cb521 !important;
+}
+
+.badge-important {
+  background-color: #cd0200 !important;
+}
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+ .alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+ .all {
+  float: right;
+  font-weight: 600;
+ }
+
+ .sum {
+  color: red;
+  font-weight: bold;
+  float: right;
+ }
+
+ .main_header {
+  color: black;
+ }
+
+ .main_header:hover {
+  color: black;
+  text-decoration: none;
+ }
+
+ span.error {
+  color: red;
+ }
+
+ span.bold {
+  font-weight: bold;
+ }
+
+span.hint {
+  color: green;
+  margin-left: 5px;
+}
+
+.order-now {
+  float: right;
+  padding: 5px 5px 5px 5px;
+  text-align: center;
+}
+
+.collect-money {
+  float: right;
+  margin-top: 20px;
+  margin-right: -150px;
+}
+
+.pagination {
+  padding-bottom: 10px;
+}

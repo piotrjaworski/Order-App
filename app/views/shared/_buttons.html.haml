@@ -1,14 +1,18 @@
 - if user_signed_in? && @today_orders.exists?
   - if @today_call.exists? && @today_call.first.user_id == current_user.id
-    = button_to "Cancel your call! \nDelivery estimated time: #{@today_call.first.delivery_time} minutes.", call_path(@today_call.last), class: 'btn btn-inverse order-now', method: :delete, data: { confirm: "Are you sure that you want to cancel your call?!" }
-    %br
+    = button_to "#{estimated_time(@today_call.first)}", '#', class: 'btn btn-success order-now', disabled: true
     %br
   - elsif @today_call.exists?
-    = button_to "#{@today_call.first.user.name} already called! \nDelivery estimated time: #{@today_call.first.delivery_time} minutes.", new_call_path, class: 'btn btn-success order-now', disabled: true, method: :get
+    = button_to "#{@today_call.first.user.name} already called! \n#{estimated_time(@today_call.first)}", '#', class: 'btn btn-success order-now', disabled: true
     %br
     %br
   - else
     = button_to "Call and order now!", new_call_path, class: 'btn btn-success order-now', data: { confirm: "Are you sure that you want to call and order today?"}, remote: true, method: :get
     %br
-  = button_to "I collect today money!", '#', class: 'btn btn-success order-now', data: { confirm: "Are you sure that you want to collect money today?"}, method: :get
+  - if @today_collect.exists? && @today_collect.first.user_id == current_user.id
+    = button_to "You are collecting money today!", '#', class: 'btn btn-info order-now', disabled: true
+  - elsif @today_collect.exists?
+    = button_to "#{@today_collect.first.user.name} is collecting money today!", '#', class: 'btn btn-info order-now', disabled: true
+  - else
+    = button_to "I collect today money!", collects_path, class: 'btn btn-info order-now', data: { confirm: "Are you sure that you want to collect money today?"}, method: :post
   = link_to "Generate Orders as PDF", orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger', target: "_blank"
