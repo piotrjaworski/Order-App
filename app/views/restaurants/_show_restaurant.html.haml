@@ -1,1 +1,21 @@
-TO DO
+.modal-header
+  %h1
+    = restaurant.name
+.modal-body
+  %p
+    %span.bold Who added:
+    = restaurant.user.name
+  %p
+    %span.bold Short info:
+    = restaurant.short_info
+  %p
+    %span.bold Type:
+    = restaurant.restaurant_type
+  %p
+    %span.bold Address:
+    = restaurant.address
+    %br
+    %br
+    - if restaurant.longitude
+      %iframe{:frameborder => "0", :height => "500", :src => @restaurant_map_params, :style => "zoom:0.90", :width => "99.6%"}
+

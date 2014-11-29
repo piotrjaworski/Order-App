@@ -20,6 +20,7 @@ gem 'omniauth-facebook'
 gem 'prawn'
 gem 'will_paginate-bootstrap'
 gem 'font-awesome-rails'
+gem 'geocoder'
 
 gem 'rubocop', require: false
 

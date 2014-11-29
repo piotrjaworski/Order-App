@@ -1,14 +1,14 @@
 - if restaurants.empty?
   %span.text-warning There are no restaurant!
 - else
-  %table.table.table-hover.table-border
+  %table.table.table-bordered.table-striped.table-hover
     %thead
       %tr
         %th.span2 Name
         %th.span3 Short info
         %th.span3 Type
         - if user_signed_in?
-          %th.span1
+          %th.span1 Actions
     %tbody
       - restaurants.each do |restaurant|
         %tr
@@ -22,9 +22,9 @@
           - if user_signed_in?
             %td.span1
               = link_to restaurant_path(restaurant), remote: true do
-                %i.icon-eye-open
+                = fa_icon "book"
               - if restaurant.user_id == current_user.id
                 = link_to edit_restaurant_path(restaurant), remote: true do
-                  %i.icon-edit
+                  = fa_icon "edit"
                 = link_to restaurant_path(restaurant), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{restaurant.name}?"} do
-                  %i.icon-remove
+                  = fa_icon "trash"

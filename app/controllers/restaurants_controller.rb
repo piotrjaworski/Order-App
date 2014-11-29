@@ -28,6 +28,7 @@ class RestaurantsController < ApplicationController
 
   def update
     @restaurant = Restaurant.find(params[:id])
+    @restaurants = Restaurant.all
     if @restaurant.save
       @restaurant.update_attributes(restaurant_params)
       render :hide_form
@@ -38,6 +39,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @restaurant_map_params = "https://www.google.com/maps/embed/v1/view?key=AIzaSyA0rwZm3ycPPL_bwLo93jTnpTUWphpRmzs&center=" + @restaurant.latitude.to_s + "," + @restaurant.longitude.to_s + "&zoom=16&maptype=roadmap"
   end
 
   def destroy
@@ -49,7 +51,7 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:short_info, :name, :user_id, :restaurant_type, :address, :logo)
+    params.require(:restaurant).permit(:short_info, :name, :user_id, :restaurant_type, :address, :logo, :latitude, :longitude)
   end
 
 end
