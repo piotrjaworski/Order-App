@@ -15,19 +15,33 @@
         %tr
           - if order.ordered == true
             %td.span3.item-ordered
+              = show_products(order)
+              - if user_signed_in?
+                - if order.user_id == current_user.id
+                  %span.label.label-success Your order
           - else
             %td.span3.item
               = show_products(order)
               - if user_signed_in?
                 - if order.user_id == current_user.id
                   %span.label.label-success Your order
-          %td.span2.item-ordered= order.user.name
+          - if order.ordered == true
+            %td.span2.item-ordered= order.user.name
+          - else
+            %td.span2= order.user.name
+
           - if order.restaurant
-            %td.span2.item-ordered= order.restaurant.name
+            - if order.ordered == true
+              %td.span2.item-ordered= order.restaurant.name
+            - else
+              %td.span2= order.restaurant.name
           - else
             %td.span2
               %span.error Restaurant which has been deleted!
-          %td.span1.item-ordered= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+          - if order.ordered == true
+            %td.span1.item-ordered= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+          - else
+            %td.span1= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
           - if user_signed_in?
             %td.span1
               = link_to order_path(order), remote: true do

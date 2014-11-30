@@ -3,7 +3,6 @@ class CollectsController < MethodsController
   def create
     @collect = Collect.new
     @collect = Collect.create
-    today_orders
     @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)

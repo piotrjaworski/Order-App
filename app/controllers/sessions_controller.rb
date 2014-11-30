@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       user = User.find_by_email(user_email)
     end
     sign_in user
-    redirect_to root_path
+    redirect_to today_orders_path
     flash[:success] = "Successfully logged in via Facebook!"
   end
 

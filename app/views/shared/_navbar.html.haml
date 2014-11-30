@@ -8,8 +8,12 @@
       .brand OrderApp
       .nav-collapse
         %ul.nav
-          %li
-            = link_to "Home", root_path
+          - if user_signed_in?
+            %li
+              = link_to "Home", today_orders_path
+          - else
+            %li
+              = link_to "Home", root_path
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Orders

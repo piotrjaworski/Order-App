@@ -9,7 +9,7 @@ class OrderPdf < Prawn::Document
     line_items
     move_down 14
     fill_color "ff0000"
-    text "Total to pay: " + count_total_price(all_orders).to_s + " zl", size: 18, style: :bold
+    text "Total to pay: " + count_total_price(all_orders).to_s + " zł", size: 18, style: :bold
     move_down 20
     fill_color "0000ff"
     text date.strftime("Raport generated at %F %I:%M%p"), size: 10
