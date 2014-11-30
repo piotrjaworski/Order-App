@@ -24,6 +24,7 @@ gem 'font-awesome-rails'
 gem 'geocoder'
 gem 'chartkick'
 gem 'groupdate'
+gem 'activeadmin', github: 'activeadmin'
 
 gem 'rubocop', require: false
 
