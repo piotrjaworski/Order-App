@@ -10,7 +10,7 @@
         %br
     .form-inputs
       - if current_user.photo
-        = image_tag(avatar_url(current_user), size: "100x100")
+        = image_tag(avatar_url(current_user), size: "100x100", class: 'border-photo')
         %br
         %br
         %p
