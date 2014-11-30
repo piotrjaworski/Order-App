@@ -1,18 +1,18 @@
 ActiveAdmin.register Order do
+  scope :ordered
 
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if resource.something?
-  #   permitted
-  # end
-
-
+  index do
+    selectable_column
+    column :id
+    column "Products" do |order|
+     raw (order.products.map { |product| (link_to product.name, admin_product_path(product)) }.join(', '))
+    end
+    column :short_info
+    column :user
+    column :restaurant
+    column :ordered
+    column :created_at
+    column :updated_at
+    actions
+  end
 end
