@@ -41,6 +41,7 @@ GEM
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.2.2)
+    chartkick (1.3.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -66,8 +67,15 @@ GEM
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     geocoder (1.2.6)
+    groupdate (2.3.0)
+      activesupport (>= 3)
     haml (4.0.5)
       tilt
+    haml-rails (0.5.3)
+      actionpack (>= 4.0.1)
+      activesupport (>= 4.0.1)
+      haml (>= 3.1, < 5.0)
+      railties (>= 4.0.1)
     hashie (3.3.2)
     hike (1.2.3)
     i18n (0.6.11)
@@ -206,12 +214,14 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (~> 2.3.2.0)
+  chartkick
   coffee-rails (~> 4.0.0)
   devise
   figaro
   font-awesome-rails
   geocoder
-  haml
+  groupdate
+  haml-rails
   jbuilder (~> 2.0)
   jquery-rails
   omniauth-facebook

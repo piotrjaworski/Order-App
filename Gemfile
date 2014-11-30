@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.1.5"
+ruby '2.1.5'
 
 gem 'rails', '4.1.4'
 gem 'pg'
@@ -10,7 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
-gem 'haml'
+gem 'haml-rails'
 gem 'figaro'
 gem 'binding_of_caller'
 gem 'simple_form'
@@ -22,6 +22,8 @@ gem 'prawn-table', '~> 0.2.0'
 gem 'will_paginate-bootstrap'
 gem 'font-awesome-rails'
 gem 'geocoder'
+gem 'chartkick'
+gem 'groupdate'
 
 gem 'rubocop', require: false
 
