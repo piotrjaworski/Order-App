@@ -4,7 +4,8 @@
       .hero-unit.text-center
         - if user_signed_in?
           %h1= "Welcome #{current_user.name}!"
-          = render 'shared/avatar'
+          %br
+          = image_tag(avatar_url(current_user), size: "100x100")
           - if current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
             %br
             %br

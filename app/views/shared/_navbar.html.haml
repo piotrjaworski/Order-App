@@ -41,7 +41,9 @@
                 %b.caret
               %ul.dropdown-menu
                 %li
-                  %a{:href => "#"} Lorem ipsum
+                  = link_to "Your profile", user_profile_path
+                %li
+                  = link_to "Edit profile", edit_user_registration_path
                 %li.divider
                 %li
                   = link_to 'Sign out', destroy_user_session_path, method: :delete

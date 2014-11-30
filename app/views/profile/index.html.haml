@@ -1,0 +1,101 @@
+%hr
+  .container
+    .row
+      .span4
+        %br
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Profile
+          %tbody
+            %tr
+              %td
+                %strong Name:
+              %td= @user.name
+            %tr
+              %td
+                %strong Email:
+              %td= @user.email
+        %br
+
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Account stats
+          %tbody
+            %tr
+              %td
+                %strong Member since:
+              %td= @user.created_at.strftime("%d/%m/%Y at %H:%M")
+            %tr
+              %td
+                %strong Last login:
+              - if @user.last_sign_in_at
+                %td= @user.last_sign_in_at.strftime("%d/%m/%Y at %H:%M")
+              - else
+                %td No last login
+            %tr
+              %td
+                %strong Login count:
+              %td= @user.sign_in_count
+            %tr
+              %td
+                %strong Your IP:
+              %td= @user.current_sign_in_ip
+
+        %br
+
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Page stats
+          %tbody
+            %tr
+              %td
+                %strong Restaurants added:
+              %td= @user.restaurants.count
+            %tr
+              %td
+                %strong Orders made:
+              %td= @user.orders.count
+            %tr
+              %td
+                %strong Last order:
+              %td= @user.orders.last.created_at.strftime("%d/%m/%Y at %H:%M")
+            %tr
+              %td
+                %strong Total spend:
+              %td= number_to_currency(count_total_price(current_user.orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+
+      .span7.offset1
+        = image_tag(avatar_url(current_user), size: "100x100", class: 'border-photo')
+        %br
+        %h3 Lasted orders
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Products
+              %th Restuarant
+              %th Price
+          %tbody
+          - @latest_orders.each do |order|
+            %tr
+              %td= show_products(order)
+              %td= order.restaurant.name
+              %td= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+        %h3 Lasted restaurants added
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Name
+              %th Type
+              %th Address
+          %tbody
+          - @latest_restaurants.each do |restaurant|
+            %tr
+              %td= restaurant.name
+              %td= restaurant.restaurant_type
+              %td= restaurant.address
+        %br
+
+

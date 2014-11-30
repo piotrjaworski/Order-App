@@ -2,17 +2,16 @@
   %h2 Log in
   = render partial: "shared/flash_messages", flash: flash
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    %br
-    %a{:href => "/auth/facebook"}
-      %button.btn.btn-facebook.btn-small.btn-margin
-        %i.fa.fa-facebook
-        | Connect with Facebook
-    %br
-    %br
     .form-inputs
       = f.input :email, required: false, autofocus: true
       = f.input :password, required: false
       = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
     .form-actions
       = f.button :submit, "Log in", class: 'btn btn-success'
+    %br
+    %a{:href => "/auth/facebook"}
+      %button.btn.btn-facebook.btn-small.btn-margin
+        %i.fa.fa-facebook
+        | Connect with Facebook
+    %br
   = render "devise/shared/links"
