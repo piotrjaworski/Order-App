@@ -13,6 +13,7 @@ class CallsController < MethodsController
     if @call.save
       @today_orders.each { |order| order.update_attributes(ordered: true) }
       @call.update_attributes(user_id: current_user.id)
+      flash.now[:success] = "Thank you for calling!"
       render :hide_form
     else
       render :show_form

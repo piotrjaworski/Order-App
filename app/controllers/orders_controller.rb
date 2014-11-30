@@ -35,6 +35,7 @@ class OrdersController < MethodsController
       @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
       @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+      flash.now[:success] = "Order has been added!"
       render :hide_form
     else
       render :show_form
@@ -49,15 +50,16 @@ class OrdersController < MethodsController
 
   def update
     @order = Order.find(params[:id])
-    if @order.save
+    @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
+    @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    if @order.save and @order.ordered != true
       @order.update_attributes(order_params)
-      @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
-      @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-      @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
-      count_total_price(today_orders)
+      flash.now[:success] = "Order has been updated!"
       render :hide_form
     else
-      render :show_form
+      flash.now[:error] = "Ordered order can't be updated!"
+      render :hide_form
     end
   end
 
@@ -68,9 +70,15 @@ class OrdersController < MethodsController
 
   def destroy
     @order = Order.find(params[:id])
-    @order.destroy
+    @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    if @order.ordered != true
+      @order.destroy
+      flash.now[:success] = "Order has been deleted!"
+    else
+      flash.now[:error] = "You can't destroy ordered item!"
+    end
   end
 
   def history

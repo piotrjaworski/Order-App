@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     end
     sign_in user
     redirect_to today_orders_path
-    flash[:success] = "Successfully logged in via Facebook!"
+    flash.now[:success] = "Successfully logged in via Facebook!"
   end
 
 end

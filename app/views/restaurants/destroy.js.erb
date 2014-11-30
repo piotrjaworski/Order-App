@@ -1,1 +1,2 @@
+$('#flash-messages').html('<%= j(render partial: 'shared/flash_messages') %>');
 $('#restaurant-list').html('<%= j(render partial: 'restaurants/restaurant_list', locals: { restaurants: @restaurants }) %>');
