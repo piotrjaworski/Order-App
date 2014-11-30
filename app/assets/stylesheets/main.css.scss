@@ -10,26 +10,12 @@
   background-color: #cd0200 !important;
 }
 
-.alert-notice {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #468847;
-    text-align: left;
- }
-
- .alert-alert {
-    background-color: #f2dede;
-    border-color: #eed3d7;
-    color: #b94a48;
-    text-align: left;
- }
-
- .all {
+.all {
   float: right;
   font-weight: 600;
  }
 
- .sum {
+.sum {
   color: red;
   font-weight: bold;
   float: right;
@@ -91,3 +77,23 @@ span.hint {
   margin-left: 230px !important;
 }
 
+.alert-notice , .alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+ .alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-danger,
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}

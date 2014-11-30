@@ -1,11 +1,12 @@
 class OrdersController < MethodsController
 
   def index
-    # => for Prawn pdf
+  end
+
+  def today_orders
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    today_orders
 
     respond_to do |format|
       format.html
@@ -31,7 +32,6 @@ class OrdersController < MethodsController
     @order = Order.create(order_params)
     if @order.save
       @order.update_attributes(user_id: current_user.id)
-      today_orders
       @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
       @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
@@ -51,7 +51,6 @@ class OrdersController < MethodsController
     @order = Order.find(params[:id])
     if @order.save
       @order.update_attributes(order_params)
-      today_orders
       @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
       @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
@@ -70,7 +69,6 @@ class OrdersController < MethodsController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    today_orders
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
@@ -78,6 +76,9 @@ class OrdersController < MethodsController
   def history
     @user_orders = current_user.orders
     @user_orders_paginate = @user_orders.order("updated_at DESC").paginate(page: params[:page], per_page: 5)
+  end
+
+  def stats
   end
 
   private

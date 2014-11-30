@@ -9,7 +9,7 @@ class CollectsController < MethodsController
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
     if @collect.save
       @collect.update_attributes(user_id: current_user.id)
-      redirect_to(root_path) and return
+      redirect_to(today_orders_path) and return
     end
   end
 

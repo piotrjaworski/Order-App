@@ -24,7 +24,4 @@ class MethodsController < ApplicationController
     object.products.map(&:name).join(", ")
   end
 
-  def today_orders
-    @orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-  end
 end
