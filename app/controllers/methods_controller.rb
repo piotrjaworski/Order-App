@@ -15,9 +15,7 @@ class MethodsController < ApplicationController
   def count_total_price(objects)
     today_sum = []
     objects.each do |order|
-      order.products.each do |product|
-        today_sum << product.price
-      end
+      order.products.each { |product| today_sum << product.price }
     end
     @today_sum = today_sum.inject(:+)
   end

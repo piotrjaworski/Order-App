@@ -8,7 +8,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'devise'
 gem 'haml'
 gem 'figaro'
@@ -18,6 +17,7 @@ gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'pry'
 gem 'omniauth-facebook'
 gem 'prawn'
+gem 'prawn-table', '~> 0.2.0'
 gem 'will_paginate-bootstrap'
 gem 'font-awesome-rails'
 gem 'geocoder'
@@ -29,7 +29,9 @@ group :development do
   gem 'spring'
 end
 
-gem 'therubyracer',  platforms: :ruby
+gem 'sdoc', '~> 0.4.0', group: :doc
+
+gem 'therubyracer', platforms: :ruby
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

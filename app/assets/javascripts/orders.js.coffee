@@ -12,3 +12,4 @@ $(document).on 'click', 'form .add_products', (event) ->
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).before($(this).data('products').replace(regexp, time))
   event.preventDefault()
+

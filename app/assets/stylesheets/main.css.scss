@@ -77,6 +77,11 @@ span.hint {
   width: 500px;
 }
 
-.fa {
+.fa-edit, .fa-book, .fa-trash {
   color: #2d2d2d !important;
 }
+
+.item-ordered {
+  text-decoration: line-through;
+}
+
