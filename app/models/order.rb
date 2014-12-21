@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  include PublicActivity::Common
+
   has_many :products
   belongs_to :user
   belongs_to :restaurant

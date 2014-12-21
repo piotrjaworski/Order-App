@@ -1,4 +1,7 @@
 class Call < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked
+
   belongs_to :user
 
   # @orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)

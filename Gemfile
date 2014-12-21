@@ -25,6 +25,8 @@ gem 'geocoder'
 gem 'chartkick'
 gem 'groupdate'
 gem 'activeadmin', github: 'activeadmin'
+gem 'public_activity'
+gem 'rails-timeago', '~> 2.0'
 
 gem 'rubocop', require: false
 

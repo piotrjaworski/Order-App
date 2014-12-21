@@ -32,6 +32,7 @@ class OrdersController < MethodsController
     @order = Order.create(order_params)
     if @order.save
       @order.update_attributes(user_id: current_user.id)
+      @order.create_activity :create, owner: current_user
       @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
       @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
       @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
@@ -55,6 +56,7 @@ class OrdersController < MethodsController
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
     if @order.save and @order.ordered != true
       @order.update_attributes(order_params)
+      @order.create_activity :update, owner: current_user
       flash.now[:success] = "Order has been updated!"
       render :hide_form
     else
@@ -75,6 +77,7 @@ class OrdersController < MethodsController
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
     if @order.ordered != true
       @order.destroy
+      @order.create_activity :destroy, owner: current_user
       flash.now[:success] = "Order has been deleted!"
     else
       flash.now[:error] = "You can't destroy ordered item!"

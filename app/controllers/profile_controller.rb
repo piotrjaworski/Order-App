@@ -1,7 +1,9 @@
 class ProfileController < MethodsController
   def index
     @user = current_user
-    @latest_orders = @user.orders.limit(5).order("created_at DESC")
-    @latest_restaurants = @user.restaurants.limit(5).order("created_at DESC")
+    @activities = PublicActivity::Activity
+                .order("created_at DESC")
+                .where(owner_id: @user.id)
+                .where("created_at >= ?", 1.month.ago)
   end
 end

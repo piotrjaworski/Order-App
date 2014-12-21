@@ -1,0 +1,6 @@
+%span.timeprint
+  = timeago_tag activity.created_at, :nojs => false, :limit => 3000.days.ago
+%br
+= fa_icon "trash"
+= activity.owner.name
+%strong destroyed restaurant.

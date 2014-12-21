@@ -1,0 +1,21 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Page stats
+  %tbody
+    %tr
+      %td
+        %strong Restaurants added:
+      %td= @user.restaurants.count
+    %tr
+      %td
+        %strong Orders made:
+      %td= @user.orders.count
+    %tr
+      %td
+        %strong Last order:
+      %td= @user.orders.last.created_at.strftime("%d/%m/%Y at %H:%M") if @user.orders.present?
+    %tr
+      %td
+        %strong Total spend:
+      %td= number_to_currency(count_total_price(current_user.orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")

@@ -15,6 +15,7 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
     if @restaurant.save
       @restaurant.update_attributes(user_id: current_user.id)
+      @restaurant.create_activity :create, owner: current_user
       render :hide_form
     else
       render :show_form
@@ -31,6 +32,7 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
     if @restaurant.save
       @restaurant.update_attributes(restaurant_params)
+      @restaurant.create_activity :update, owner: current_user
       render :hide_form
     else
       render :show_form
@@ -44,6 +46,7 @@ class RestaurantsController < ApplicationController
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
+    @restaurant.create_activity :destroy, owner: current_user
     @restaurant.destroy
     @restaurants = Restaurant.all
   end

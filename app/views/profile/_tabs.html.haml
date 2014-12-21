@@ -1,0 +1,20 @@
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#tab1"}
+        = fa_icon "star", text: "Rates"
+    %li
+      %a{"data-toggle" => "tab", href: "#tab2"}
+        = fa_icon "cutlery", text: "Orders"
+    %li
+      %a{"data-toggle" => "tab", href: "#tab3"}
+        = fa_icon "rss", text: "Public Activity"
+  .tab-content
+    #tab1.tab-pane.active
+      %p I'm in Section 1.
+    #tab2.tab-pane
+      %p Howdy, I'm in Section 2.
+    #tab3.tab-pane.activity
+      %ul
+        - @activities.each do |activity|
+          %li= render_activity activity
