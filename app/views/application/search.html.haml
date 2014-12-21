@@ -1,0 +1,25 @@
+.container
+  - if @search.empty?
+    Please enter any pharse!
+  - elsif @results.empty?
+    There are no results for searching
+    = @search + "."
+  - else
+    %h4
+      = pluralize(@results.count, "result")
+      for
+      = @search
+      pharse:
+    - if @products.present?
+      %h4 Products found:
+      %ul
+        - @products.each do |products|
+          %li
+            = products.name
+    - if @restaurants.present?
+      %h4 Restaurants found:
+      %ul
+        - @restaurants.each do |restaurant|
+          %li
+            = restaurant.name
+

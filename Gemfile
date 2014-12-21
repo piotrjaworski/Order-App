@@ -15,7 +15,6 @@ gem 'figaro'
 gem 'binding_of_caller'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 2.3.2.0'
-gem 'pry'
 gem 'omniauth-facebook'
 gem 'prawn'
 gem 'prawn-table', '~> 0.2.0'
@@ -33,6 +32,7 @@ gem 'rubocop', require: false
 group :development do
   gem 'better_errors'
   gem 'spring'
+  gem 'pry-byebug'
 end
 
 gem 'sdoc', '~> 0.4.0', group: :doc

@@ -28,8 +28,10 @@
                 = link_to 'Your orders history', orders_history_path
           %li.dropdown
             = link_to 'Restaurants', restaurants_path
-        %form.navbar-search.pull-left{:action => ""}
-          %input.search-query.span2{:placeholder => "Search", :type => "text"}
+          %li.search
+            = form_tag search_path, :method => 'get', :class => "form-search" do
+              = text_field_tag :query, nil, class: "input-medium search-query", placeholder: 'Search'
+              = link_to_submit fa_icon("search")
         - if user_signed_in?
           %ul.nav.pull-right
             %li

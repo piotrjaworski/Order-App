@@ -1,3 +1,12 @@
+a {
+  color: #848484;
+
+  &:hover {
+    color: #0099DD;
+  }
+}
+
+
 .btn-margin {
   margin-top: -7px !important;
 }
@@ -100,4 +109,15 @@ span.hint {
 
 .border-photo {
   border-radius: 60px;
+}
+
+.search {
+  height: 38px;
+  line-height: 38px;
+  form {
+    #search {
+      padding: 2px 8px 2px 8px;
+      font-size: 12px;
+    }
+  }
 }

@@ -13,4 +13,9 @@ class Restaurant < ActiveRecord::Base
   after_validation :geocode, :if => :address_changed?
 
   TYPES = ["Chinese Restaurant", "Fast Food", "Cafe", "Pub", "Pizzeria", "Dinner"]
+
+  def self.search(query)
+    where("restaurant_type LIKE ? OR address LIKE ? OR name LIKE ? or short_info LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+  end
+
 end

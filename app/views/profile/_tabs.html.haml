@@ -11,10 +11,33 @@
         = fa_icon "rss", text: "Public Activity"
   .tab-content
     #tab1.tab-pane.active
-      %p I'm in Section 1.
-    #tab2.tab-pane
-      %p Howdy, I'm in Section 2.
+      %ul
+        - if @rates.nil?
+          There are no rates yet!
+        - else
+          s
+    #tab2.tab-pane.activity
+      %ul
+        - if @orders.empty?
+          There are no orders yet!
+        - else
+          - @orders.to_enum.with_index(1).each do |order, index|
+            %li
+              \#
+              = index
+              %br
+              %strong Restaurant:
+              = order.restaurant.name
+              %br
+              %strong Products:
+              = show_products(order)
+              %br
+              %strong Payed:
+              = number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
     #tab3.tab-pane.activity
       %ul
-        - @activities.each do |activity|
-          %li= render_activity activity
+        - if @activities.empty?
+          There are not activities yet!
+        - else
+          - @activities.each do |activity|
+            %li= render_activity activity

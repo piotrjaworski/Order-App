@@ -5,11 +5,7 @@ class MethodsController < ApplicationController
   private
 
   def count_price(object)
-    sum = []
-    object.products.each do |product|
-      sum << product.price
-    end
-    @sum = sum.inject(:+)
+    object.products.map(&:price).inject(:+)
   end
 
   def count_total_price(objects)
