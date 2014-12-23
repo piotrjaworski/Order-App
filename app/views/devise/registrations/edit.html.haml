@@ -1,40 +1,42 @@
 .container
-  %h2
-    Edit your profile
-  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-    = f.error_notification
-    - if @user.errors.full_messages.any?
-      - @user.errors.full_messages.each do |error_message|
-        = error_message if @user.errors.full_messages.first == error_message
-        %br
-        %br
-    .form-inputs
-      - if current_user.photo
-        = image_tag(avatar_url(current_user), size: "100x100", class: 'border-photo')
-        %br
-        %br
-        %p
-          In order to edit your photo visit
-          %a{:href => "http://facebook.com", target: "blank"} facebook.com
-      - else
-        = image_tag avatar_url(current_user)
-        %br
-        %br
-        %p
-          In order to edit your photo visit
-          %a{:href => "http://gravatar.com", target: "blank"} gravatar.com
-      %br
-      - if current_user.provider == "facebook"
-        = f.input :name, required: true, readonly: true, hint: "You can't change name if you connected your account with Facebook"
-        = f.input :email, required: true, readonly: true, hint: "You can't change email if you connected your account with Facebook"
-      - else
-        = f.input :name, required: true, autofocus: true
-        = f.input :email, required: true
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          %p
-            Currently waiting confirmation for: #{resource.unconfirmed_email}
-        = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
-        = f.input :password_confirmation, required: false
-        = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
-        .form-actions
-          = f.button :submit, "Update", class: 'btn btn-info'
+  .row
+    .span6.offset3
+      %h2
+        Edit your profile
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        = f.error_notification
+        - if @user.errors.full_messages.any?
+          - @user.errors.full_messages.each do |error_message|
+            = error_message if @user.errors.full_messages.first == error_message
+            %br
+            %br
+        .form-inputs
+          - if current_user.photo
+            = image_tag(avatar_url(current_user), size: "100x100", class: 'border-photo')
+            %br
+            %br
+            %p
+              In order to edit your photo visit
+              %a{:href => "http://facebook.com", target: "blank"} facebook.com
+          - else
+            = image_tag avatar_url(current_user)
+            %br
+            %br
+            %p
+              In order to edit your photo visit
+              %a{:href => "http://gravatar.com", target: "blank"} gravatar.com
+          %br
+          - if current_user.provider == "facebook"
+            = f.input :name, required: false, readonly: true, hint: "You can't change name if you connected your account with Facebook"
+            = f.input :email, required: false, readonly: true, hint: "You can't change email if you connected your account with Facebook"
+          - else
+            = f.input :name, required: false, autofocus: true
+            = f.input :email, required: false
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              %p
+                Currently waiting confirmation for: #{resource.unconfirmed_email}
+            = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
+            = f.input :password_confirmation, required: false
+            = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
+            .form-actions
+              = f.button :submit, "Update", class: 'btn btn-info'

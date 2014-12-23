@@ -1,4 +1,10 @@
-#header-main
-  = render partial: 'shared/index_header'
+/ #header-main
+/   = render partial: 'shared/index_header'
+/ .container
+/   = render partial: 'shared/flash_messages', flash: flash
 .container
-  = render partial: 'shared/flash_messages', flash: flash
+  - if user_signed_in?
+
+    bl
+  - else
+    dl

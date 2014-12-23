@@ -3,7 +3,44 @@
     z-index: 1051 !important;
 }
 
+.centered {
+  text-align: center;
 
+  .button-add {
+    padding: 8px 0 8px 0;
+  }
+}
+
+.login-info {
+  margin-top: 9px;
+  a {
+    color: #999999;
+    &:hover {
+      color: #FFFFFF;
+      cursor: default;
+      text-decoration: none;
+    }
+  }
+}
+
+.activity {
+  ul {
+    li {
+      list-style: none;
+      padding: 8px 0 8px 0;
+      border-bottom: 1px solid #DDDDDD;
+      .timeprint {
+        font-size: 12px;
+        color: #b2b2b2;
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+
+.border-photo-profile {
+  border-radius: 100%;
+}
 
 // .btn-margin {
 //   margin-top: -7px !important;

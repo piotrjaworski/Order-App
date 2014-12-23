@@ -1,0 +1,10 @@
+.container
+  .row
+    %h1.text-center Today orders list
+    .centered
+      .button-add
+        - if current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
+          = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true, data: {confirm: "You have already added Order - maybe edit it?"}
+        - else
+          = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+

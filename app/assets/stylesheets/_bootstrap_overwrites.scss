@@ -1,6 +1,30 @@
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+input[type="submit"] {
+  font-family: 'Lato', sans-serif;
+}
+
 .navbar-inner {
   border-radius: 0px;
   -webkit-border-radius: 0px;
+}
+
+a {
+  color: #555555;
+  &:hover {
+    text-decoration: none;
+    color: #828282;
+  }
+}
+
+i.fa {
+  color: #333333;
+  &:hover {
+    color: #606060;
+    text-decoration: none;
+  }
 }
 
 i.fa-search {
@@ -11,6 +35,60 @@ i.fa-search {
   }
 }
 
+.label {
+  margin: 0 5px 0 5px;
+}
+
 .label-facebook {
   background-color: #47639E;
 }
+
+.connect-login {
+  width: 150px;
+  height: 22px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 22px;
+  padding-bottom: 2px;
+}
+
+.has-error {
+  input {
+    border: 1px solid #b94a48;
+  }
+
+  .help-block {
+    color: #b94a48;
+  }
+}
+
+.span6.offset3 {
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 250px;
+  }
+}
+
+.alert-notice {
+  background-color: #dff0d8;
+  color: #468847;
+  border-color: #d6e9c6;
+}
+
+.alert-alert {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.modal.fade.in {
+  input[type="text"], input[type="number"], input[type="password"], textarea {
+    width: 250px;
+    max-width: 250px;
+    max-height: 150px;
+  }
+
+  select {
+    width: 265px;
+  }
+}
+

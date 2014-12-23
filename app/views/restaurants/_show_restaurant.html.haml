@@ -1,4 +1,5 @@
 .modal-header
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
   %h1
     = restaurant.name
 .modal-body
@@ -18,4 +19,6 @@
     %br
     - if restaurant.longitude
       %iframe{:frameborder => "0", :height => "500", :src => @restaurant_map_params, :style => "zoom:0.90", :width => "99.6%"}
+.modal-footer
+  %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close
 

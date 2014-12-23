@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
 
   def index
     @restaurants = Restaurant.all
@@ -41,7 +41,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
-    @restaurant_map_params = "https://www.google.com/maps/embed/v1/view?key=AIzaSyA0rwZm3ycPPL_bwLo93jTnpTUWphpRmzs&center=" + @restaurant.latitude.to_s + "," + @restaurant.longitude.to_s + "&zoom=16&maptype=roadmap"
+    @restaurant_map_params = "https://www.google.com/maps/embed/v1/place?key=AIzaSyA0rwZm3ycPPL_bwLo93jTnpTUWphpRmzs&q=" + @restaurant.latitude.to_s + "," + @restaurant.longitude.to_s + "&zoom=17"
   end
 
   def destroy

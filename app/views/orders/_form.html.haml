@@ -8,8 +8,8 @@
     = link_to_add_products "+ Add Product", f, :products, "add_products badge badge-success"
     %br
     %br
-    = f.input :short_info, input_html: { class: 'form-control' }, label: 'Details'
-    = f.input :restaurant_id, input_html: { class: 'form-control' }, label: 'Restaurant', collection: @restaurants
+    = f.input :short_info, input_html: { class: 'form-control' }, label: 'Details', required: false
+    = f.input :restaurant_id, input_html: { class: 'form-control' }, label: 'Restaurant', collection: @restaurants, required: false
   .modal-footer
-    = f.submit 'Confirm', class: 'btn btn-info'
+    = f.submit 'Confirm', class: 'btn btn-primary'
 

@@ -33,4 +33,11 @@ module ApplicationHelper
     link_to_function (block_given? ? capture(&block) : args[0]), "$(this).closest('form').submit()", args.extract_options!
   end
 
+  def link_to_active_li(text, url, html_options = {})
+    active = "active" if current_page?(url)
+    content_tag :li, class: active do
+      link_to text, url, html_options
+    end
+  end
+
 end

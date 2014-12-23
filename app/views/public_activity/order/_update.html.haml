@@ -3,9 +3,8 @@
 %br
 = fa_icon "refresh"
 = activity.owner.name
-%strong updated order
+%strong updated order containing
 - if activity.trackable
-  = link_to activity.trackable.name + ".", activity.trackable
-  \.
+  = link_to "#{show_products(activity.trackable)}." , activity.trackable
 - else
   which has been destroyed.

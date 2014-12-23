@@ -1,15 +1,11 @@
+%h1.text-center
+  Restaurant List
 - if user_signed_in?
-  .container.text-center
-    = button_to 'Add new restaurant', new_restaurant_path, method: :get, class: 'btn btn-info', remote: true
+  .centered
+    .button-add
+      = button_to 'Add new restaurant', new_restaurant_path, method: :get, class: 'btn btn-primary', remote: true
 - else
-  .container
-    .row-fluid
-      .span10-offset1
-        .hero-unit.text-center
-          %h1 Order App
-          %h4
-            Restaurant list
-            %br
-            Please login if you want to add new one or show existing.
+  .centered
+    %h3 Please login if you want to add new one or show existing.
 
 

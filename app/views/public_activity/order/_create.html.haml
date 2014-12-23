@@ -3,8 +3,8 @@
 %br
 = fa_icon "plus"
 = activity.owner.name
-%strong added new order
+%strong ordered
 - if activity.trackable
-  = link_to activity.trackable.name + ".", activity.trackable
+  = link_to "#{show_products(activity.trackable)}" , activity.trackable
 - else
   which has been destroyed.

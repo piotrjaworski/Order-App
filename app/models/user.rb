@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :calls
   has_many :collects
 
+  validates :name, presence: true
+  validates :password_confirmation, presence: true
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
