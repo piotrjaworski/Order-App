@@ -7,5 +7,6 @@ class ProfileController < MethodsController
                                           .where("created_at >= ?", 1.month.ago)
     @orders = Order.where(user_id: @user.id).limit(15)
     @rates = nil
+    typehead
   end
 end

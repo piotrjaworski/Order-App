@@ -1,8 +1,9 @@
-class RestaurantsController < ApplicationController
+class RestaurantsController < MethodsController
   before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
 
   def index
     @restaurants = Restaurant.all
+    typehead
   end
 
   def new
