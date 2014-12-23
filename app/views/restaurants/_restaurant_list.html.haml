@@ -1,32 +1,38 @@
-- if restaurants.empty?
-  %span.text-warning There are no restaurant!
-- else
-  %table.table.table-bordered.table-striped.table-hover
-    %thead
-      %tr
-        %th.span2 Name
-        %th.span3 Short info
-        %th.span2 Type
-        %th.span1 Orders
-        - if user_signed_in?
-          %th.span1 Actions
-    %tbody
-      - restaurants.each do |restaurant|
-        %tr
-          %td.span2
-            = restaurant.name
+#restaurants
+  .container
+    - if @restaurants.empty?
+      %span.text-warning There are no restaurant!
+    - else
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %tr
+            %th.span2 Name
+            %th.span3 Short info
+            %th.span2 Type
+            %th.span1 Orders
             - if user_signed_in?
-              - if restaurant.user_id == current_user.id
-                %span.label.label-success Your added this
-          %td.span3= restaurant.short_info
-          %td.span2= restaurant.restaurant_type
-          %td.span1= restaurant.orders.count
-          - if user_signed_in?
-            %td.span1
-              = link_to restaurant_path(restaurant), remote: true do
-                = fa_icon "eye"
-              - if restaurant.user_id == current_user.id
-                = link_to edit_restaurant_path(restaurant), remote: true do
-                  = fa_icon "edit"
-                = link_to restaurant_path(restaurant), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{restaurant.name}?"} do
-                  = fa_icon "trash-o"
+              %th.span1 Actions
+        %tbody
+          - @restaurants.each do |restaurant|
+            %tr
+              %td.span2
+                = restaurant.name
+                - if user_signed_in?
+                  - if restaurant.user_id == current_user.id
+                    %span.label.label-success Your added this
+              %td.span3= restaurant.short_info
+              %td.span2= restaurant.restaurant_type
+              %td.span1= restaurant.orders.count
+              - if user_signed_in?
+                %td.span1
+                  = link_to restaurant_path(restaurant), remote: true do
+                    = fa_icon "eye"
+                  - if restaurant.user_id == current_user.id
+                    = link_to edit_restaurant_path(restaurant), remote: true do
+                      = fa_icon "edit"
+                    = link_to restaurant_path(restaurant), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{restaurant.name}?"} do
+                      = fa_icon "trash-o"
+    .row
+      .text-center.pagination
+        = will_paginate @restaurants, renderer: BootstrapPagination::Rails, previous_label: "← Next", next_label: "Previous →"
+

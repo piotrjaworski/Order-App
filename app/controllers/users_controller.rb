@@ -3,7 +3,8 @@ class UsersController < MethodsController
   def index
     @users = User.all
     @users = @users.order("name ASC")
-    @users = @users.paginate(:page => params[:page], :per_page => 30)
+    @users = @users.paginate(:page => params[:page], :per_page => 20)
+    typehead
   end
 
   def show

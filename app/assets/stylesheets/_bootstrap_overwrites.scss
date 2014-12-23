@@ -92,3 +92,13 @@ i.fa-search {
   }
 }
 
+.brand {
+  margin-top: -2px;
+  a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

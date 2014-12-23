@@ -5,10 +5,9 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      .brand OrderApp
+      .brand= link_to "Order App", root_path
       .nav-collapse
         %ul.nav
-          = link_to_active_li "Home", root_path
           - if user_signed_in?
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

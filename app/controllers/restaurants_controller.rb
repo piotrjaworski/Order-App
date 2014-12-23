@@ -3,6 +3,8 @@ class RestaurantsController < MethodsController
 
   def index
     @restaurants = Restaurant.all
+    @restaurants = @restaurants.order("name ASC")
+    @restaurants = @restaurants.paginate(:page => params[:page], :per_page => 15)
     typehead
   end
 
