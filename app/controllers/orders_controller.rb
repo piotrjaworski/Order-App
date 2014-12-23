@@ -7,6 +7,7 @@ class OrdersController < MethodsController
     @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
 
     respond_to do |format|
       format.html

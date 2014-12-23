@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :restaurants
   resources :calls, only: [:new, :create]
   resources :collects, only: [:create]
+  resources :rates
+  resources :products
 
   get 'profile/index'
   get 'search', to: 'application#search', as: 'search'

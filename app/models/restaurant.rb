@@ -3,6 +3,7 @@ class Restaurant < ActiveRecord::Base
 
   belongs_to :user
   has_many :orders
+  has_many :rates
 
   validates :name, presence: true, uniqueness: true
   validates :short_info, presence: true

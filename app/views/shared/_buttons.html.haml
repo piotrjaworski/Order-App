@@ -1,18 +1,15 @@
-- if user_signed_in? && @today_orders.exists?
-  - if @today_call.exists? && @today_call.first.user_id == current_user.id
-    = button_to "#{estimated_time(@today_call.first)}", '#', class: 'btn btn-success order-now', disabled: true
-    %br
-  - elsif @today_call.exists?
-    = button_to "#{@today_call.first.user.name} already called! \n#{estimated_time(@today_call.first)}", '#', class: 'btn btn-success order-now', disabled: true
-    %br
-    %br
-  - else
-    = button_to "Call and order now!", new_call_path, class: 'btn btn-success order-now', data: { confirm: "Are you sure that you want to call and order today?"}, remote: true, method: :get
-    %br
-  - if @today_collect.exists? && @today_collect.first.user_id == current_user.id
-    = button_to "You are collecting money today!", '#', class: 'btn btn-info order-now', disabled: true
-  - elsif @today_collect.exists?
-    = button_to "#{@today_collect.first.user.name} is collecting money today!", '#', class: 'btn btn-info order-now', disabled: true
-  - else
-    = button_to "I collect today money!", collects_path, class: 'btn btn-info order-now', data: { confirm: "Are you sure that you want to collect money today?"}, method: :post
-  = link_to "Generate Orders as PDF", today_orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger', target: "_blank"
+.text-right.buttons-order
+  - if user_signed_in? && @today_orders.exists?
+    - if @today_call.exists? && @today_call.first.user_id == current_user.id
+      = button_to "#{estimated_time(@today_call.first)}", '#', class: 'btn btn-success order-now', disabled: true
+    - elsif @today_call.exists?
+      = button_to "#{@today_call.first.user.name} already called! \n#{estimated_time(@today_call.first)}", '#', class: 'btn btn-success order-now', disabled: true
+    - else
+      = button_to "Call and order now!", new_call_path, class: 'btn btn-success order-now', data: { confirm: "Are you sure that you want to call and order today?"}, remote: true, method: :get
+    - if @today_collect.exists? && @today_collect.first.user_id == current_user.id
+      = button_to "You are collecting money today!", '#', class: 'btn btn-info order-now', disabled: true
+    - elsif @today_collect.exists?
+      = button_to "#{@today_collect.first.user.name} is collecting money today!", '#', class: 'btn btn-info order-now', disabled: true
+    - else
+      = button_to "I collect today money!", collects_path, class: 'btn btn-info order-now', data: { confirm: "Are you sure that you want to collect money today?"}, method: :post
+    = link_to "Generate Orders as PDF", today_orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger', target: "_blank"

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :restaurants
   has_many :calls
   has_many :collects
+  has_many :rates
 
   validates :name, presence: true
   validates :password_confirmation, presence: true

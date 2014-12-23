@@ -42,6 +42,27 @@
   border-radius: 100%;
 }
 
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.total {
+  color: black;
+}
+
+.price-total {
+  color: red;
+  padding: 5px 0 5px 0;
+}
+
+.buttons-orders {
+  padding-bottom: 15px;
+}
+
 // .btn-margin {
 //   margin-top: -7px !important;
 // }

@@ -1,4 +1,5 @@
 .modal-header
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
   %h1
     Order #
     = order.id

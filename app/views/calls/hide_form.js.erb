@@ -1,4 +1,3 @@
-$('#header-main').html('<%= j(render partial: 'shared/header') %>');
 $('#flash-messages').html('<%= j(render partial: 'shared/flash_messages') %>');
 $('#order-list').html('<%= j(render partial: 'orders/order_list', locals: { orders: @today_orders })%>');
 $('#buttons').html('<%= j(render partial: 'shared/buttons')%>');
