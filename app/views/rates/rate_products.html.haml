@@ -1,0 +1,11 @@
+.container
+  %h3 Products which you can rate:
+  %ul
+  - @products_to_rate.each do |product|
+    %li
+      = product.name
+    %li
+      = product.price
+    %li
+      = rate(product)
+    %br

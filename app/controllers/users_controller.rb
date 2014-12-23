@@ -1,6 +1,13 @@
-class ProfileController < MethodsController
+class UsersController < MethodsController
+
   def index
-    @user = current_user
+    @users = User.all
+    @users = @users.order("name ASC")
+    @users = @users.paginate(:page => params[:page], :per_page => 30)
+  end
+
+  def show
+    @user = User.find(params[:id])
     @activities = PublicActivity::Activity
                                           .order("created_at DESC")
                                           .where(owner_id: @user.id)

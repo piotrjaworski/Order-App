@@ -2,7 +2,7 @@
   %thead
     %tr
       %th
-        = "#{current_user.name} stats:"
+        = "#{@user.name} stats:"
   %tbody
     %tr
       %td
@@ -19,4 +19,4 @@
     %tr
       %td
         %strong Total spend:
-      %td= number_to_currency(count_total_price(current_user.orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+      %td= number_to_currency(count_total_price(@user.orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")

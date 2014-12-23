@@ -83,7 +83,7 @@ class OrdersController < MethodsController
 
   def history
     @user_orders = current_user.orders
-    @user_orders_paginate = @user_orders.order("updated_at DESC").paginate(page: params[:page], per_page: 15)
+    @user_orders_paginate = @user_orders.order("updated_at DESC").paginate(page: params[:page], per_page: 5)
 
     typehead
   end

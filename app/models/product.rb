@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :order
   belongs_to :restaurant
-  has_many :dates
+  has_many :rates
 
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }

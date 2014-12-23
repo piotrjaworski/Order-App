@@ -1,0 +1,24 @@
+#users
+  .container
+    %h1.text-center.header-padding
+      Users list
+    %table.table.table-bordered.table-striped.table-hover
+      %thead
+        %tr
+          %th.span3 Name
+          %th.span2 Email
+          %th.span2 Joined
+          %th.span1 Orders
+          %th.span1 Profile
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td.span3= user.name
+            %td.span3= user.email
+            %td.span2= user.created_at.strftime("%F")
+            %td.span1= user.orders.count
+            %td.span1= link_to fa_icon("user"), show_user_path(user)
+
+    .row
+      .text-center.pagination
+        = will_paginate @users, renderer: BootstrapPagination::Rails, previous_label: "← Next", next_label: "Previous →"
