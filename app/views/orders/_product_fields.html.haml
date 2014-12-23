@@ -1,5 +1,5 @@
 %fieldset
-  = f.input :name, required: false
+  = f.input :name, required: false, :input_html => {"data-provide" => "typeahead", "data-source" => @products_typehead.to_json, :autocomplete => :off }
   = f.input :price, required: false
   = f.hidden_field :_destroy
   = link_to '- Remove', '#', class: 'remove_products badge badge-important'

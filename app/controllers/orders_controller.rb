@@ -1,6 +1,7 @@
 class OrdersController < MethodsController
 
   def index
+    typehead
   end
 
   def today_orders
@@ -26,6 +27,7 @@ class OrdersController < MethodsController
   def new
     @order = Order.new
     @restaurants = Restaurant.all
+    products_typehead
     render :show_form
   end
 
@@ -94,6 +96,10 @@ class OrdersController < MethodsController
   # => to edit this permit!
   def order_params
     params.require(:order).permit!
+  end
+
+  def products_typehead
+    @products_typehead = Product.select(:name).distinct.map(&:name)
   end
 
 end

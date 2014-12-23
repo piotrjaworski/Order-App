@@ -24,6 +24,8 @@ class MethodsController < ApplicationController
     products = Product.select(:name).distinct.map(&:name)
     restaurants = Restaurant.select(:name).distinct.map(&:name)
     @typehead = products + restaurants
+    @typehead.uniq!
+    @typehead
   end
 
   def orders_collects_calls

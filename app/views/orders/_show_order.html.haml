@@ -21,5 +21,5 @@
 .modal-footer
   %h3
     Total to pay:
-    %span.error= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+    %span.price-total= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
 

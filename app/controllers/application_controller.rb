@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
       @restaurants = Restaurant.search(@search)
       @results = @products + @restaurants
     end
+    typehead
   end
 
   def after_sign_in_path_for(resource_or_scope)
@@ -25,5 +26,13 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :photo, :email, :password, :password_confirmation) }
+  end
+
+  def typehead
+    products = Product.select(:name).distinct.map(&:name)
+    restaurants = Restaurant.select(:name).distinct.map(&:name)
+    @typehead = products + restaurants
+    @typehead.uniq!
+    @typehead
   end
 end
