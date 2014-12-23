@@ -20,4 +20,16 @@ class MethodsController < ApplicationController
     object.products.map(&:name).join(", ")
   end
 
+  def typehead
+    products = Product.select(:name).distinct.map(&:name)
+    restaurants = Restaurant.select(:name).distinct.map(&:name)
+    @typehead = products + restaurants
+  end
+
+  def orders_collects_calls
+    @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
+    @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+  end
+
 end

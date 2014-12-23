@@ -4,10 +4,10 @@ class OrdersController < MethodsController
   end
 
   def today_orders
-    @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-    @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    orders_collects_calls
     @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
+
+    typehead
 
     respond_to do |format|
       format.html
@@ -34,9 +34,7 @@ class OrdersController < MethodsController
     if @order.save
       @order.update_attributes(user_id: current_user.id)
       @order.create_activity :create, owner: current_user
-      @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
-      @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-      @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+      orders_collects_calls
       flash.now[:success] = "Order has been added!"
       render :hide_form
     else
@@ -52,9 +50,7 @@ class OrdersController < MethodsController
 
   def update
     @order = Order.find(params[:id])
-    @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-    @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    orders_collects_calls
     if @order.save and @order.ordered != true
       @order.update_attributes(order_params)
       @order.create_activity :update, owner: current_user
@@ -73,9 +69,7 @@ class OrdersController < MethodsController
 
   def destroy
     @order = Order.find(params[:id])
-    @today_call = Call.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    @today_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-    @today_collect = Collect.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    orders_collects_calls
     if @order.ordered != true
       @order.destroy
       @order.create_activity :destroy, owner: current_user
@@ -88,6 +82,8 @@ class OrdersController < MethodsController
   def history
     @user_orders = current_user.orders
     @user_orders_paginate = @user_orders.order("updated_at DESC").paginate(page: params[:page], per_page: 15)
+
+    typehead
   end
 
   def stats
@@ -99,4 +95,5 @@ class OrdersController < MethodsController
   def order_params
     params.require(:order).permit!
   end
+
 end
