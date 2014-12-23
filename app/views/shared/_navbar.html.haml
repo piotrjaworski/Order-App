@@ -1,4 +1,4 @@
-.navbar
+.navbar.navbar-inverse
   .navbar-inner
     .container{:style => "width: auto;"}
       %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
@@ -28,10 +28,9 @@
                 = link_to 'Your orders history', orders_history_path
           %li.dropdown
             = link_to 'Restaurants', restaurants_path
-          %li.search
-            = form_tag search_path, :method => 'get', :class => "form-search" do
-              = text_field_tag :query, nil, class: "input-medium search-query", placeholder: 'Search'
-              = link_to_submit fa_icon("search")
+          = form_tag search_path, :method => 'get', :class => "navbar-search pull-left" do
+            = text_field_tag :query, nil, class: "search-query span2", placeholder: 'Search'
+            = link_to_submit fa_icon("search")
         - if user_signed_in?
           %ul.nav.pull-right
             %li
@@ -57,7 +56,7 @@
               = link_to "Sign up", new_user_registration_path
             %li
               %a{:href => "/auth/facebook"}
-                %button.btn.btn-facebook.btn-small.btn-margin
+                %span.label.label-info.label-facebook
                   %i.fa.fa-facebook
                   | Connect with Facebook
 

@@ -5,7 +5,10 @@
  */
 
 @import "bootstrap";
-@import "bootswatch";
-@import "font-awesome";
-@import "social";
+@import "bootstrap_overwrites";
 @import "main";
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
+body {
+  font-family: 'Lato', sans-serif;
+}
