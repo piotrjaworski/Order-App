@@ -1,10 +1,9 @@
-/ #header-main
-/   = render partial: 'shared/index_header'
-/ .container
-/   = render partial: 'shared/flash_messages', flash: flash
-.container
-  - if user_signed_in?
-
-    bl
-  - else
-    dl
+#header-main
+  = render partial: 'header'
+#flash-messages.container
+  = render partial: 'shared/flash_messages', flash: flash
+#order-list
+  = render partial: 'orders/order_list', locals: { orders: @today_orders }
+#buttons.container
+  = render partial: 'shared/buttons'
+#modal.modal.fade

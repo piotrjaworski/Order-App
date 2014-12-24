@@ -1,54 +1,56 @@
-- if orders.empty?
-  %span.text-warning There are no orders!
-- else
-  %table.table.table-bordered.table-striped.table-hover
-    %thead
-      %tr
-        %th.span3 Order
-        %th.span2 Who ordered
-        %th.span2 Restaurant
-        %th.span1 To pay
-        - if user_signed_in?
-          %th.span1 Actions
-    %tbody
-      - orders.each do |order|
+.container
+  - if orders.empty?
+    %p.text-center
+      %span.text-warning There are no orders!
+  - else
+    %table.table.table-bordered.table-striped.table-hover
+      %thead
         %tr
-          - if order.ordered == true
-            %td.span3.item-ordered
-              = show_products(order)
-              - if user_signed_in?
-                - if order.user_id == current_user.id
-                  %span.label.label-success Your order
-          - else
-            %td.span3.item
-              = show_products(order)
-              - if user_signed_in?
-                - if order.user_id == current_user.id
-                  %span.label.label-success Your order
-          - if order.ordered == true
-            %td.span2.item-ordered= order.user.name
-          - else
-            %td.span2= order.user.name
-
-          - if order.restaurant
-            - if order.ordered == true
-              %td.span2.item-ordered= order.restaurant.name
-            - else
-              %td.span2= order.restaurant.name
-          - else
-            %td.span2
-              %span.error Restaurant which has been deleted!
-          - if order.ordered == true
-            %td.span1.item-ordered= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-          - else
-            %td.span1= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+          %th.span3 Order
+          %th.span2 Who ordered
+          %th.span2 Restaurant
+          %th.span1 To pay
           - if user_signed_in?
-            %td.span1
-              = link_to order_path(order), remote: true do
-                = fa_icon "eye"
-              - if order.user_id == current_user.id
-                = link_to edit_order_path(order), remote: true do
-                  = fa_icon "edit"
-                = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{order.short_info}?"} do
-                  = fa_icon "trash-o"
-  %h4.text-right.price-total= "<span class='total'>To pay: </span>".html_safe + number_to_currency(count_total_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+            %th.span1 Actions
+      %tbody
+        - orders.each do |order|
+          %tr
+            - if order.ordered == true
+              %td.span3.item-ordered
+                = show_products(order)
+                - if user_signed_in?
+                  - if order.user_id == current_user.id
+                    %span.label.label-success Your order
+            - else
+              %td.span3.item
+                = show_products(order)
+                - if user_signed_in?
+                  - if order.user_id == current_user.id
+                    %span.label.label-success Your order
+            - if order.ordered == true
+              %td.span2.item-ordered= order.user.name
+            - else
+              %td.span2= order.user.name
+
+            - if order.restaurant
+              - if order.ordered == true
+                %td.span2.item-ordered= order.restaurant.name
+              - else
+                %td.span2= order.restaurant.name
+            - else
+              %td.span2
+                %span.error Restaurant which has been deleted!
+            - if order.ordered == true
+              %td.span1.item-ordered= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+            - else
+              %td.span1= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+            - if user_signed_in?
+              %td.span1
+                = link_to order_path(order), remote: true do
+                  = fa_icon "eye"
+                - if order.user_id == current_user.id
+                  = link_to edit_order_path(order), remote: true do
+                    = fa_icon "edit"
+                  = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{order.short_info}?"} do
+                    = fa_icon "trash-o"
+    %h4.text-right.price-total= "<span class='total'>To pay: </span>".html_safe + number_to_currency(count_total_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")

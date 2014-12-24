@@ -1,10 +1,6 @@
 class OrdersController < MethodsController
 
   def index
-    typehead
-  end
-
-  def today_orders
     orders_collects_calls
     @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
 
@@ -88,6 +84,7 @@ class OrdersController < MethodsController
   end
 
   def stats
+    typehead
   end
 
   private

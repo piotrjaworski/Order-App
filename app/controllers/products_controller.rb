@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class ProductsController < MethodsController
 
   def index
     restaurants = Restaurant.all
@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
       @products << products
     end
     @products.flatten!
+    typehead
   end
 
 end

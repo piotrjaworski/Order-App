@@ -15,7 +15,7 @@
                 %b.caret
               %ul.dropdown-menu
                 %li
-                  = link_to 'Today orders', today_orders_path
+                  = link_to 'Today orders', root_path
                 %li
                   = link_to 'Order stats', orders_stats_path
                 %li.divider
@@ -32,7 +32,7 @@
               /   = link_to 'Order stats', orders_stats_path
               %li.divider
               %li
-                = link_to 'Rate Restaurants', orders_history_path
+                = link_to 'Rate Restaurants', rate_restaurants_path
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Products
@@ -44,7 +44,7 @@
               /   = link_to 'Order stats', orders_stats_path
               %li.divider
               %li
-                = link_to 'Rate Products', orders_history_path
+                = link_to 'Rate Products', rate_products_path
           = link_to_active_li "Users", users_index_path
           %li.divider-vertical
           = form_tag search_path, :method => 'get', :class => "navbar-search pull-left" do

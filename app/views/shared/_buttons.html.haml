@@ -12,4 +12,4 @@
       = button_to "#{@today_collect.first.user.name} is collecting money today!", '#', class: 'btn btn-info order-now', disabled: true
     - else
       = button_to "I collect today money!", collects_path, class: 'btn btn-info order-now', data: { confirm: "Are you sure that you want to collect money today?"}, method: :post
-    = link_to "Generate Orders as PDF", today_orders_path(@today_orders, format: "pdf"), class: 'btn btn-danger', target: "_blank"
+    = link_to "Generate Orders as PDF", root_path(@today_orders, format: "pdf"), class: 'btn btn-danger', target: "_blank"

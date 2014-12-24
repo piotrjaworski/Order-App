@@ -1,0 +1,3 @@
+m = $('#modal');
+m.html('<%= j(render partial: 'form', locals: {rate: @rate}) %>');
+m.modal('show');
