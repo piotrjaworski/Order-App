@@ -4,9 +4,9 @@
     = rate.new_record? ? "New rate" : "Edit #{rate.id}"
 = simple_form_for rate, class: 'clearfix', remote: true do |f|
   .modal-body
-    = f.input :score, input_html: { class: 'form-control' }, label: 'Score', required: false
-    = f.input :product_id, collection: @products_to_rate, selected: params[:id], as: :hidden if @products_to_rate.present?
-    = f.input :restaurant_id, collection: @restaurants_to_rate, selected: params[:id], as: :hidden if @restaurants_to_rate.present?
+    = f.input :score, label: 'Score', collection: Rate::Scores
+    = f.input :product_id, collection: @products_to_rate, input_html: { value: params[:id] }, as: :hidden if @products_to_rate.present?
+    = f.input :restaurant_id, collection: @restaurants_to_rate, input_html: { value: params[:id] }, as: :hidden if @restaurants_to_rate.present?
   .modal-footer
     %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close
     = f.submit 'Submit', class: 'btn btn-primary'

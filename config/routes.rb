@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'rate_products/new/:id', to: 'rates#new_product_rate', as: 'new_product_rate'
   get 'rate_restaurants/new/:id', to: 'rates#new_restaurant_rate', as: 'new_restaurant_rate'
   get 'profile/index'
+  get 'products', to: 'products#index', as: 'products_index'
   get 'users', to: 'users#index', as: 'users_index'
   get 'users/:id', to: 'users#show', as: 'show_user'
   get 'search', to: 'application#search', as: 'search'

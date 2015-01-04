@@ -10,12 +10,26 @@
       %a{"data-toggle" => "tab", href: "#tab3"}
         = fa_icon "rss", text: "Public Activity"
   .tab-content
-    #tab1.tab-pane.active
+    #tab1.tab-pane.active.activity
       %ul
         - if @rates.nil?
           There are no rates yet!
         - else
-          s
+          - @rates.to_enum.with_index(1).each do |rate, index|
+            %li
+              \#
+              = index
+              %br
+              %strong Rate:
+              - for i in 1..rate.score.to_i
+                = fa_icon("star")
+              %br
+              - if rate.product
+                %strong Product:
+                = rate.product.try(:name)
+              - else
+                %strong Resturant:
+                = rate.restaurant.try(:name)
     #tab2.tab-pane.activity
       %ul
         - if @orders.empty?

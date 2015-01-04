@@ -1,0 +1,59 @@
+#rate_restaurants
+  .container
+    - if @restaurants_to_rate.empty?
+      %span.text-warning There are no restaurants available to rate!
+    - else
+      %h1.text-center.header-padding Restaurants to rate
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %tr
+            %th.span2 Name
+            %th.span3 Short Info
+            %th.span2 Restaurant Type
+            %th.span1 Average Rate
+            - if user_signed_in?
+              %th.span1 Add Rate
+        %tbody
+          - @restaurants_to_rate.each do |restaurant|
+            %tr
+              %td.span2= restaurant.name
+              %td.span3= restaurant.short_info
+              %td.span2= restaurant.restaurant_type
+              %td.span1
+                - if rate(restaurant).nil?
+                  Not rated yet
+                - else
+                  = rate(restaurant)
+              - if user_signed_in?
+                %td.span1
+                  = link_to new_restaurant_rate_path(restaurant), remote: true do
+                    = fa_icon "thumbs-up"
+    - if @restaurants_rated.present?
+      %h1.text-center.header-padding Restaurants rated by you
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %tr
+            %th.span2 Name
+            %th.span2 Short Info
+            %th.span2 Restaurant Type
+            %th.span1 Average Rate
+            %th.span1 Your Rate
+            - if user_signed_in?
+              %th.span1 Edit Rate
+        %tbody
+          - @restaurants_rated.each do |restaurant|
+            %tr
+              %td.span2= restaurant.name
+              %td.span2= restaurant.short_info
+              %td.span2= restaurant.restaurant_type
+              %td.span1
+                - for i in 1..rate(restaurant).to_i
+                  = fa_icon("star")
+              %td.span1
+                - for i in 1..user_rate(restaurant).to_i
+                  = fa_icon("star")
+              - if user_signed_in?
+                %td.span1
+                  = link_to '#', remote: true do
+                    = fa_icon "thumbs-up"
+

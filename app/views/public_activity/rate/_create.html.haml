@@ -1,0 +1,12 @@
+%span.timeprint
+  = timeago_tag activity.created_at, :nojs => false, :limit => 3000.days.ago
+%br
+= fa_icon "star"
+= activity.owner.name
+%strong rated
+- if activity.trackable and activity.trackable.product
+  = link_to "#{activity.trackable.product.name}" , activity.trackable
+- elsif activity.trackable and activity.trackable.restaurant
+  = link_to "#{activity.trackable.restaurant.name}" , activity.trackable
+- else
+  something which has been destroyed.
