@@ -2,7 +2,9 @@ class OrdersController < MethodsController
 
   def index
     orders_collects_calls
-    @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
+    if user_signed_in?
+      @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
+    end
 
     typehead
 
