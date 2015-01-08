@@ -10,16 +10,20 @@
   %p
     %span.bold Restaurant:
     = order.restaurant.name
+  - if order.short_info.present?
+    %p
+      %span.bold Details:
+      = order.short_info
   %p
     %h4 Products:
     - order.products.each do |product|
       \-
       %span.bold= product.name
       \-
-      %span.error= number_to_currency(product.price, unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+      %span.error= number_to_currency(product.price, unit: "zł", separator: ",", delimiter: "", format: "%n %u")
       %br
 .modal-footer
   %h3
     Total to pay:
-    %span.price-total= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+    %span.price-total= number_to_currency(count_price(order), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
 

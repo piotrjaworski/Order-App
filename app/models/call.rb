@@ -4,9 +4,6 @@ class Call < ActiveRecord::Base
 
   belongs_to :user
 
-  # @orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
-  # today_date = DateTime.now
-
   def ordered?
     Call.where("created_at >= ?", Time.zone.now.beginning_of_day).exists?
   end

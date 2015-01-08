@@ -62,7 +62,7 @@ i.fa-facebook {
 }
 
 .has-error {
-  input {
+  input, select.form-control {
     border: 1px solid #b94a48;
   }
 

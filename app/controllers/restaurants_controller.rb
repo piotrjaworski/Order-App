@@ -2,9 +2,7 @@ class RestaurantsController < MethodsController
   before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
 
   def index
-    @restaurants = Restaurant.all
-    @restaurants = @restaurants.order("name ASC")
-    @restaurants = @restaurants.paginate(:page => params[:page], :per_page => 15)
+    restaurants_pagination
     typehead
   end
 
@@ -15,7 +13,7 @@ class RestaurantsController < MethodsController
 
   def create
     @restaurant = Restaurant.create(restaurant_params)
-    @restaurants = Restaurant.all
+    restaurants_pagination
     if @restaurant.save
       @restaurant.update_attributes(user_id: current_user.id)
       @restaurant.create_activity :create, owner: current_user
@@ -32,7 +30,7 @@ class RestaurantsController < MethodsController
 
   def update
     @restaurant = Restaurant.find(params[:id])
-    @restaurants = Restaurant.all
+    restaurants_pagination
     if @restaurant.save
       @restaurant.update_attributes(restaurant_params)
       @restaurant.create_activity :update, owner: current_user
@@ -51,13 +49,19 @@ class RestaurantsController < MethodsController
     @restaurant = Restaurant.find(params[:id])
     @restaurant.create_activity :destroy, owner: current_user
     @restaurant.destroy
-    @restaurants = Restaurant.all
+    restaurants_pagination
   end
 
   private
 
   def restaurant_params
     params.require(:restaurant).permit(:short_info, :name, :user_id, :restaurant_type, :address, :logo, :latitude, :longitude)
+  end
+
+  def restaurants_pagination
+    @restaurants = Restaurant.all
+    @restaurants = @restaurants.order("name ASC")
+    @restaurants = @restaurants.paginate(page: params[:page], per_page: 10)
   end
 
 end

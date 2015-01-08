@@ -1,7 +1,8 @@
 #rate_restaurants
   .container
     - if @restaurants_to_rate.empty?
-      %span.text-warning There are no restaurants available to rate!
+      %p.text-center
+        %span.text-warning There are no restaurants available to rate!
     - else
       %h1.text-center.header-padding Restaurants to rate
       %table.table.table-bordered.table-striped.table-hover

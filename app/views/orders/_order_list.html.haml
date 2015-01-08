@@ -41,9 +41,9 @@
               %td.span2
                 %span.error Restaurant which has been deleted!
             - if order.ordered == true
-              %td.span1.item-ordered= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+              %td.span1.item-ordered= number_to_currency(count_price(order), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
             - else
-              %td.span1= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+              %td.span1= number_to_currency(count_price(order), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
             - if user_signed_in?
               %td.span1
                 = link_to order_path(order), remote: true do
@@ -53,4 +53,4 @@
                     = fa_icon "edit"
                   = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{order.short_info}?"} do
                     = fa_icon "trash-o"
-    %h4.text-right.price-total= "<span class='total'>To pay: </span>".html_safe + number_to_currency(count_total_price(@today_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+    %h4.text-right.price-total= "<span class='total'>To pay: </span>".html_safe + number_to_currency(count_total_price(@today_orders), unit: "zł", separator: ",", delimiter: "", format: "%n %u")

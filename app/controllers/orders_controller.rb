@@ -31,6 +31,7 @@ class OrdersController < MethodsController
 
   def create
     @order = Order.create(order_params)
+    @restaurants = Restaurant.all
     if @order.save
       @order.update_attributes(user_id: current_user.id)
       @order.create_activity :create, owner: current_user
@@ -71,8 +72,8 @@ class OrdersController < MethodsController
     @order = Order.find(params[:id])
     orders_collects_calls
     if @order.ordered != true
-      @order.destroy
       @order.create_activity :destroy, owner: current_user
+      @order.destroy
       flash.now[:success] = "Order has been deleted!"
     else
       flash.now[:error] = "You can't destroy ordered item!"

@@ -47,7 +47,7 @@
               = show_products(order)
               %br
               %strong Payed:
-              = number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+              = number_to_currency(count_price(order), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
     #tab3.tab-pane.activity
       %ul
         - if @activities.empty?

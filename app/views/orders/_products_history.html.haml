@@ -21,12 +21,10 @@
               - else
                 %td.span3
                   %span.error Restaurant which has been deleted!
-              %td.span2= number_to_currency(count_price(order), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
+              %td.span2= number_to_currency(count_price(order), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
               %td.span2= order.created_at.strftime("%d/%m/%Y at %T")
       .row
-        %p
-          .sum= number_to_currency(count_total_price(@user_orders), unit: "zl", separator: ",", delimiter: "", format: "%n %u")
-          .all Total you spend: &nbsp
+        %h4.text-right.price-total= "<span class='total'>Total you spent: </span>".html_safe + number_to_currency(count_total_price(@user_orders), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
       .row
         .text-center.pagination
           = will_paginate @user_orders_paginate, renderer: BootstrapPagination::Rails, previous_label: "← Newer", next_label: "Older →"

@@ -1,7 +1,8 @@
 #products-list
   .container
     - if @products_to_rate.empty?
-      %span.text-warning There are no products available to rate!
+      %p.text-center
+        %span.text-warning There are no products available to rate!
     - else
       %h1.text-center.header-padding Products to rate
       %table.table.table-bordered.table-striped.table-hover
