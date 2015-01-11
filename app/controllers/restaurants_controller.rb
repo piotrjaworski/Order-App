@@ -12,10 +12,9 @@ class RestaurantsController < MethodsController
   end
 
   def create
-    @restaurant = Restaurant.create(restaurant_params)
+    @restaurant = current_user.restaurants.build(restaurant_params)
     restaurants_pagination
     if @restaurant.save
-      @restaurant.update_attributes(user_id: current_user.id)
       @restaurant.create_activity :create, owner: current_user
       render :hide_form
     else

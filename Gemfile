@@ -28,8 +28,6 @@ gem 'public_activity'
 gem 'rails-timeago', '~> 2.0'
 gem 'faker'
 
-gem 'rubocop', require: false
-
 group :development do
   gem 'better_errors'
   gem 'spring'

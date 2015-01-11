@@ -30,10 +30,9 @@ class OrdersController < MethodsController
   end
 
   def create
-    @order = Order.create(order_params)
+    @order = current_user.orders.build(order_params)
     @restaurants = Restaurant.all
     if @order.save
-      @order.update_attributes(user_id: current_user.id)
       @order.create_activity :create, owner: current_user
       orders_collects_calls
       flash.now[:success] = "Order has been added!"
@@ -92,13 +91,11 @@ class OrdersController < MethodsController
 
   private
 
-  # => to edit this permit!
-  def order_params
-    params.require(:order).permit!
-  end
+    def order_params
+      params.require(:order).permit(:short_info, :restaurant_id, {:products_attributes => [:name, :price]})
+    end
 
-  def products_typehead
-    @products_typehead = Product.select(:name).distinct.map(&:name)
-  end
-
+    def products_typehead
+      @products_typehead = Product.select(:name).distinct.map(&:name)
+    end
 end

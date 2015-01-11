@@ -6,11 +6,10 @@ class CallsController < MethodsController
   end
 
   def create
-    @call = Call.new(call_params) #create
+    @call = current_user.calls.build(call_params)
     orders_collects_calls
     if @call.save
       @today_orders.each { |order| order.update_attributes(ordered: true) }
-      @call.update_attributes(user_id: current_user.id)
       @call.create_activity :create, owner: current_user
       flash.now[:success] = "Thank you for calling!"
       render :hide_form
@@ -21,8 +20,8 @@ class CallsController < MethodsController
 
   private
 
-  def call_params
-    params.require(:call).permit(:user_id, :delivery_time)
-  end
+    def call_params
+      params.require(:call).permit(:user_id, :delivery_time)
+    end
 
 end

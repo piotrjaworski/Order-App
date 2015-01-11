@@ -13,9 +13,8 @@ class RatesController < MethodsController
   end
 
   def create
-    @rate = Rate.create(rate_params)
+    @rate = current_user.rates.build(rate_params)
     if @rate.save
-      @rate.update_attributes(user_id: current_user.id)
       @rate.create_activity :create, owner: current_user
       products_to_rate
       restaurants_to_rate

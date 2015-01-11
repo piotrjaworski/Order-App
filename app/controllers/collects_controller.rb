@@ -1,20 +1,16 @@
 class CollectsController < MethodsController
 
   def create
-    @collect = Collect.new
-    @collect = Collect.create
+    @collect = current_user.collects.create
     @collect.create_activity :create, owner: current_user
     orders_collects_calls
-    if @collect.save
-      @collect.update_attributes(user_id: current_user.id)
-      redirect_to(root_path) and return
-    end
+    redirect_to(root_path) and return if @collect.save
   end
 
   private
 
-  def collect_params
-    params.require(:collect).permit(:user_id)
-  end
+    def collect_params
+      params.require(:collect).permit(:user_id)
+    end
 
 end

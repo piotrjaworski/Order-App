@@ -1,10 +1,13 @@
 %h1.text-center Today orders list
-.centered
-  .button-add
-    - if @your_order and @today_call.empty?
-      = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true, data: {confirm: "You have already added Order - maybe edit it?"}
-    - elsif @today_call.present? and @your_order
-      = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true, data: {confirm: "Some has already called. Maybe ask if you can add a new order?"}
-    - else
-      = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true
-
+- if user_signed_in?
+  .centered
+    .button-add
+      - if @your_order and @today_call.empty?
+        = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true, data: {confirm: "You have already added Order - maybe edit it?"}
+      - elsif @today_call.present? and @your_order
+        = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true, data: {confirm: "Some has already called. Maybe ask if you can add a new order?"}
+      - else
+        = button_to 'Add an order', new_order_path, method: :get, class: 'btn btn-primary', remote: true
+- else
+  %p.text-center
+    %span.text-warning Please login to add an Order!

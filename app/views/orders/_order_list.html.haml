@@ -28,9 +28,9 @@
                   - if order.user_id == current_user.id
                     %span.label.label-success Your order
             - if order.ordered == true
-              %td.span2.item-ordered= order.user.name
+              %td.span2.item-ordered= order.user.try(:name)
             - else
-              %td.span2= order.user.name
+              %td.span2= order.user.try(:name)
 
             - if order.restaurant
               - if order.ordered == true

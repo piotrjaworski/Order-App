@@ -5,7 +5,7 @@ class MethodsController < ApplicationController
   private
 
   def count_price(object)
-    object.products.map(&:price).inject(:+)
+    object.products.sum(:price)
   end
 
   def count_total_price(objects)
@@ -17,15 +17,7 @@ class MethodsController < ApplicationController
   end
 
   def show_products(object)
-    object.products.map(&:name).join(", ")
-  end
-
-  def typehead
-    products = Product.select(:name).distinct.map(&:name)
-    restaurants = Restaurant.select(:name).distinct.map(&:name)
-    @typehead = products + restaurants
-    @typehead.uniq!
-    @typehead
+    object.products.pluck(:name).join(", ")
   end
 
   def orders_collects_calls
