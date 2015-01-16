@@ -15,7 +15,8 @@
             %tr
               %td.span2= product.try(:name)
               %td.span3= product.try(:restaurant).try(:name)
-              %td.span2= product.try(:price)
+              %td.span2
+                = number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
     .row
       .text-center.pagination
         = will_paginate @products, renderer: BootstrapPagination::Rails, previous_label: "← Next", next_label: "Previous →"
