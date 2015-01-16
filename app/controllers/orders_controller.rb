@@ -1,12 +1,12 @@
 class OrdersController < MethodsController
+  before_action :set_order, only: [:show, :edit, :destroy, :update]
+  before_action :typehead, expect: [:index, :create, :update, :destroy, :history, :stats]
 
   def index
     orders_collects_calls
     if user_signed_in?
       @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
     end
-
-    typehead
 
     respond_to do |format|
       format.html
@@ -25,7 +25,6 @@ class OrdersController < MethodsController
   def new
     @order = Order.new
     @restaurants = Restaurant.all
-    products_typehead
     render :show_form
   end
 
@@ -43,13 +42,10 @@ class OrdersController < MethodsController
   end
 
   def edit
-    @order = Order.find(params[:id])
-    @restaurants = Restaurant.all
     render :show_form
   end
 
   def update
-    @order = Order.find(params[:id])
     orders_collects_calls
     if @order.save and @order.ordered != true
       @order.update_attributes(order_params)
@@ -63,12 +59,9 @@ class OrdersController < MethodsController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @restaurants = Restaurant.all
   end
 
   def destroy
-    @order = Order.find(params[:id])
     orders_collects_calls
     if @order.ordered != true
       @order.create_activity :destroy, owner: current_user
@@ -82,11 +75,9 @@ class OrdersController < MethodsController
   def history
     @user_orders = current_user.orders
     @user_orders_paginate = @user_orders.order("updated_at DESC").paginate(page: params[:page], per_page: 10)
-    typehead
   end
 
   def stats
-    typehead
   end
 
   private
@@ -95,7 +86,8 @@ class OrdersController < MethodsController
       params.require(:order).permit(:short_info, :restaurant_id, {:products_attributes => [:name, :price]})
     end
 
-    def products_typehead
-      @products_typehead = Product.select(:name).distinct.map(&:name)
+    def set_order
+      @order = Order.find(params[:id])
+      @restaurants = Restaurant.all
     end
 end

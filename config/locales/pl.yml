@@ -1,0 +1,7 @@
+pl:
+  date:
+    formats:
+      default: zł
+  time:
+    formats:
+      default: zł

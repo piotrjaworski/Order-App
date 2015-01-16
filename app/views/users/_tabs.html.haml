@@ -12,7 +12,7 @@
   .tab-content
     #tab1.tab-pane.active.activity
       %ul
-        - if @rates.nil?
+        - if @rates.empty?
           There are no rates yet!
         - else
           - @rates.to_enum.with_index(1).each do |rate, index|
