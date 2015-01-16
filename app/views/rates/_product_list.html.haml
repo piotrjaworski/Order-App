@@ -17,9 +17,9 @@
         %tbody
           - @products_to_rate.each do |product|
             %tr
-              %td.span2= product.name
-              %td.span3= product.price
-              %td.span2= product.restaurant.name if product.restaurant
+              %td.span2= product.try(:name)
+              %td.span3= product.try(:price)
+              %td.span2= product.try(:restaurant).try(:name)
               %td.span1
                 - if rate(product).nil?
                   Not rated yet

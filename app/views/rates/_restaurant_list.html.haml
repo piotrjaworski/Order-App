@@ -17,9 +17,9 @@
         %tbody
           - @restaurants_to_rate.each do |restaurant|
             %tr
-              %td.span2= restaurant.name
-              %td.span3= restaurant.short_info
-              %td.span2= restaurant.restaurant_type
+              %td.span2= restaurant.try(:name)
+              %td.span3= restaurant.try(:short_info)
+              %td.span2= restaurant.try(:restaurant_type)
               %td.span1
                 - if rate(restaurant).nil?
                   Not rated yet

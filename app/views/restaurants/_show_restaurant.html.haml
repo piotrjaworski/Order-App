@@ -1,20 +1,20 @@
 .modal-header
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
   %h1
-    = restaurant.name
+    = restaurant.try(:name)
 .modal-body
   %p
     %span.bold Who added:
-    = restaurant.user.name
+    = restaurant.try(:user).try(:name)
   %p
     %span.bold Short info:
-    = restaurant.short_info
+    = restaurant.try(:short_info)
   %p
     %span.bold Type:
-    = restaurant.restaurant_type
+    = restaurant.try(:restaurant_type)
   %p
     %span.bold Address:
-    = restaurant.address
+    = restaurant.try(:address)
     %br
     %br
     - if restaurant.longitude

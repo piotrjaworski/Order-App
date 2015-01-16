@@ -1,5 +1,6 @@
-%ul
-  - @products.each do |product|
-    %li
-      = product.name
-      = product.restaurant.name
+:javascript
+  $(function(){
+     $('.pagination a').attr('data-remote', 'true')
+  });
+
+= render partial: 'products_list'

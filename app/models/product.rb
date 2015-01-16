@@ -1,6 +1,5 @@
 class Product < ActiveRecord::Base
   include PublicActivity::Common
-
   before_save :assign_restaurant
 
   belongs_to :order

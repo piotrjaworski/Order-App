@@ -1,0 +1,22 @@
+#products
+  .container
+    - if @products.empty?
+      %p.text-center
+        %span.text-warning There are no restaurant!
+    - else
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %tr
+            %th.span2 Name
+            %th.span3 Restaurant
+            %th.span2 Price
+        %tbody
+          - @products.each do |product|
+            %tr
+              %td.span2= product.try(:name)
+              %td.span3= product.try(:restaurant).try(:name)
+              %td.span2= product.try(:price)
+    .row
+      .text-center.pagination
+        = will_paginate @products, renderer: BootstrapPagination::Rails, previous_label: "← Next", next_label: "Previous →"
+
