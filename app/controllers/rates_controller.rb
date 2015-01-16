@@ -16,11 +16,11 @@ class RatesController < MethodsController
     @rate = current_user.rates.build(rate_params)
     if @rate.save
       @rate.create_activity :create, owner: current_user
-      products_to_rate
+        products_to_rate
       restaurants_to_rate
-      if @rate.restaurant_id.nil?
+      if @rate.product_id.present?
         render :hide_form_product
-      else
+      elsif @rate.restaurant_id.present?
         render :hide_form_restaurant
       end
     else

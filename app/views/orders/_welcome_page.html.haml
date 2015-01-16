@@ -1,0 +1,25 @@
+.container
+  .span10.offset1
+    .hero-unit.text-center
+      %h1 Hello!
+      %h4
+        Are you tired and hungry after 5 hours of work?
+        %br
+        You and your workmates don't know how to organise and order food?
+        %br
+        %br
+        This is the place for you!
+        %br
+        Just login and order tasty food!
+        %br
+        %br
+      %a{:href => "/register"}
+        %span.label.label-info.label-register.connect-login
+          Create a new account
+      %a{:href => "/auth/facebook"}
+        %span.label.label-info.label-facebook.connect-login
+          %i.fa.fa-facebook
+          | Login with Facebook
+      %a{:href => "/login"}
+        %span.label.label-info.label-login.connect-login
+          Login

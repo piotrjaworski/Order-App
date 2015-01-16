@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
       user.save
     else
       user = User.find_by_email(user_email)
+      user.update(provider: "facebook") if user.provider.nil?
     end
     sign_in user
     redirect_to root_path

@@ -5,7 +5,7 @@ ActiveAdmin.register Order do
     selectable_column
     column :id
     column "Products" do |order|
-     raw (order.products.map { |product| (link_to product.name, admin_product_path(product)) }.join(', '))
+      raw (order.products.map { |product| (link_to product.name, admin_product_path(product)) }.join(', '))
     end
     column :short_info
     column :user
