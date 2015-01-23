@@ -3,7 +3,10 @@ class CreateRestaurants < ActiveRecord::Migration
     create_table :restaurants do |t|
       t.string :name
       t.string :short_info
-      t.string :type
+      t.string :restaurant_type
+      t.string :address
+      t.float  :latitude
+      t.float  :longitude
 
       t.timestamps
     end

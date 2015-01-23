@@ -82,10 +82,10 @@ ActiveRecord::Schema.define(version: 20150123174755) do
   create_table "orders", force: true do |t|
     t.text     "short_info"
     t.integer  "user_id"
+    t.string   "restaurant_id"
+    t.boolean  "ordered"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "restaurant_id"
-    t.boolean  "ordered"
   end
 
   create_table "orders_products", force: true do |t|
@@ -102,9 +102,9 @@ ActiveRecord::Schema.define(version: 20150123174755) do
     t.string   "name"
     t.decimal  "price"
     t.integer  "order_id"
+    t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "restaurant_id"
   end
 
   create_table "products_users", force: true do |t|
@@ -135,13 +135,11 @@ ActiveRecord::Schema.define(version: 20150123174755) do
     t.string   "name"
     t.string   "short_info"
     t.string   "restaurant_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
     t.string   "address"
-    t.string   "logo"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "restaurants_users", force: true do |t|
@@ -170,8 +168,6 @@ ActiveRecord::Schema.define(version: 20150123174755) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
     t.text     "photo"
   end
 

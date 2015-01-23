@@ -4,6 +4,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :name
       t.decimal :price
       t.integer :order_id
+      t.integer :restaurant_id
 
       t.timestamps
     end
