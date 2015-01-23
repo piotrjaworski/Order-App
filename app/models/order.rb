@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   include PublicActivity::Common
 
-  has_many :products
+  has_and_belongs_to_many :products
   belongs_to :user
   belongs_to :restaurant
 

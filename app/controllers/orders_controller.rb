@@ -31,6 +31,7 @@ class OrdersController < MethodsController
   def create
     @order = current_user.orders.build(order_params)
     @restaurants = Restaurant.all
+    @order.products.each { |p| p.restaurant_id = @order.restaurant_id }
     if @order.save
       @order.create_activity :create, owner: current_user
       orders_collects_calls

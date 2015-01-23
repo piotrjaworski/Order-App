@@ -1,10 +1,10 @@
 class Restaurant < ActiveRecord::Base
   include PublicActivity::Common
 
-  belongs_to :user
-  has_many :orders
-  has_many :rates
+  has_and_belongs_to_many :users
   has_many :products
+  has_many :rates
+  has_many :orders
 
   validates :name, presence: true, uniqueness: true
   validates :short_info, presence: true

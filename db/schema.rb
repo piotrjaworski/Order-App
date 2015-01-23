@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223155053) do
+ActiveRecord::Schema.define(version: 20150123174755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,16 @@ ActiveRecord::Schema.define(version: 20141223155053) do
     t.boolean  "ordered"
   end
 
+  create_table "orders_products", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders_products", ["order_id"], name: "index_orders_products_on_order_id", using: :btree
+  add_index "orders_products", ["product_id"], name: "index_orders_products_on_product_id", using: :btree
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.decimal  "price"
@@ -96,6 +106,16 @@ ActiveRecord::Schema.define(version: 20141223155053) do
     t.datetime "updated_at"
     t.integer  "restaurant_id"
   end
+
+  create_table "products_users", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "products_users", ["product_id"], name: "index_products_users_on_product_id", using: :btree
+  add_index "products_users", ["user_id"], name: "index_products_users_on_user_id", using: :btree
 
   create_table "rates", force: true do |t|
     t.decimal  "score"
@@ -123,6 +143,16 @@ ActiveRecord::Schema.define(version: 20141223155053) do
     t.float    "latitude"
     t.float    "longitude"
   end
+
+  create_table "restaurants_users", force: true do |t|
+    t.integer  "restaurant_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "restaurants_users", ["restaurant_id"], name: "index_restaurants_users_on_restaurant_id", using: :btree
+  add_index "restaurants_users", ["user_id"], name: "index_restaurants_users_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
