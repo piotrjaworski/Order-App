@@ -41,7 +41,7 @@
               = index
               %br
               %strong Restaurant:
-              = order.restaurant.name
+              = order.restaurant.try(:name)
               %br
               %strong Products:
               = show_products(order)

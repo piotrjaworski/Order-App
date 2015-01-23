@@ -19,7 +19,7 @@
               %td.span2
                 = restaurant.try(:name)
                 - if user_signed_in?
-                  - if restaurant.user_id == current_user.id
+                  - if restaurant.creator_id == current_user.id
                     %span.label.label-success Your added this
               %td.span3= restaurant.try(:short_info)
               %td.span2= restaurant.try(:restaurant_type)
@@ -28,7 +28,7 @@
                 %td.span1
                   = link_to restaurant_path(restaurant), remote: true do
                     = fa_icon "eye"
-                  - if restaurant.user_id == current_user.id
+                  - if restaurant.creator_id == current_user.id
                     = link_to edit_restaurant_path(restaurant), remote: true do
                       = fa_icon "edit"
                     = link_to restaurant_path(restaurant), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{restaurant.name}?"} do

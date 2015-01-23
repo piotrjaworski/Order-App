@@ -13,7 +13,8 @@ class RestaurantsController < MethodsController
   end
 
   def create
-    @restaurant = current_user.restaurants.build(restaurant_params)
+    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.creator_id = current_user.id
     if @restaurant.save
       @restaurant.create_activity :create, owner: current_user
       render :hide_form
@@ -48,7 +49,7 @@ class RestaurantsController < MethodsController
   private
 
     def restaurant_params
-      params.require(:restaurant).permit(:short_info, :name, :user_id, :restaurant_type, :address, :logo, :latitude, :longitude)
+      params.require(:restaurant).permit(:short_info, :name, :creator_id, :restaurant_type, :address, :latitude, :longitude)
     end
 
     def set_restaurant

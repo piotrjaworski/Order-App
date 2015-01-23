@@ -5,7 +5,7 @@
 .modal-body
   %p
     %span.bold Who added:
-    = restaurant.try(:user).try(:name)
+    = restaurant.creator
   %p
     %span.bold Short info:
     = restaurant.try(:short_info)

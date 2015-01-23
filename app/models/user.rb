@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  attr_accessor :restaurants_added
+
   has_and_belongs_to_many :products
   has_and_belongs_to_many :restaurants
   has_many :orders
@@ -12,6 +14,10 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates :password_confirmation, presence: true
+
+  def restaurants_added
+    Restaurant.where(creator_id: self.id).count
+  end
 
   def self.facebook_login(auth_type)
     auth = auth_type

@@ -9,11 +9,11 @@
     %tr
       %td
         %strong Name:
-      %td= @user.name
+      %td= @user.try(:name)
     %tr
       %td
         %strong Email:
-      %td= @user.email
+      %td= @user.try(:email)
     %tr
       %td
         %strong Member since:

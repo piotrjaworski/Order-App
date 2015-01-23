@@ -69,13 +69,13 @@ class RatesController < MethodsController
     end
 
     def restaurants_to_rate
-      @restaurants_to_rate = []
-      @restaurants_rated = []
-      current_user.orders.each do |order|
-        @restaurants_to_rate << order.restaurant if order.restaurant.rates.where(user_id: current_user.id).empty?
-        @restaurants_rated << order.restaurant if order.restaurant.rates.where(user_id: current_user.id).present?
-      end
-      @restaurants_to_rate = @restaurants_to_rate.uniq { |r| r.name }
-      @restaurants_rated = @restaurants_rated.uniq { |r| r.name }
+      @restaurants_to_rate = current_user.restaurants
+      @restaurants_rated = current_user.restaurants
+      # current_user.orders.each do |order|
+      #   @restaurants_to_rate << order.restaurant if order.restaurant.rates.where(user_id: current_user.id).empty?
+      #   @restaurants_rated << order.restaurant if order.restaurant.rates.where(user_id: current_user.id).present?
+      # end
+      # @restaurants_to_rate = @restaurants_to_rate.uniq { |r| r.name }
+      # @restaurants_rated = @restaurants_rated.uniq { |r| r.name }
     end
 end

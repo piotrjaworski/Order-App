@@ -13,8 +13,8 @@
       %tbody
         - @users.each do |user|
           %tr
-            %td.span3= user.name
-            %td.span3= user.email
+            %td.span3= user.try(:name)
+            %td.span3= user.try(:email)
             %td.span2= user.created_at.strftime("%F")
             %td.span1= user.orders.count
             %td.span1= link_to fa_icon("user"), show_user_path(user)

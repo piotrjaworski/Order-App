@@ -32,8 +32,22 @@ class OrdersController < MethodsController
     @order = current_user.orders.build(order_params)
     @restaurants = Restaurant.all
     @order.products.each { |p| p.restaurant_id = @order.restaurant_id }
+
+    @order.products.each_with_index do |product, i|
+      if @found = Product.where(name: product.name, restaurant_id: product.restaurant_id).first
+        @order.products[i].destroy
+        @order.products << @found
+      end
+      if @found
+        current_user.products << @found if current_user.products.where(id: @found.id).empty?
+      else
+        current_user.products << product if current_user.products.where(id: product.id).empty?
+      end
+    end
+
     if @order.save
       @order.create_activity :create, owner: current_user
+      current_user.restaurants << @order.restaurant if current_user.restaurants.where(id: @order.restaurant.id).empty?
       orders_collects_calls
       flash.now[:success] = "Order has been added!"
       render :hide_form
