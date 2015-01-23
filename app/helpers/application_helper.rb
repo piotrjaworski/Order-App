@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def avatar_url(user)
     if user.photo
-      "http://graph.facebook.com/" + "#{user.photo}" + "/picture?type=large"
+      "http://graph.facebook.com/" + "#{user.uid}" + "/picture?type=large"
     else
       default_url = "#{root_url}images/guest.png"
       gravatar_id = Digest::MD5::hexdigest(user.email).downcase
