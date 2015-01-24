@@ -11,4 +11,8 @@ module RatesHelper
   def find_rate(object)
     object.rates.where(user_id: current_user.id).first.id
   end
+
+  def show_item_in_public_activity(object)
+    object.product.present? ? object.product.name : object.restaurant.name
+  end
 end

@@ -5,6 +5,6 @@
 = activity.owner.name
 %strong ordered
 - if activity.trackable
-  = link_to "#{show_products(activity.trackable)}" , activity.trackable
+  = show_products(activity.trackable) + "."
 - else
   which has been destroyed.

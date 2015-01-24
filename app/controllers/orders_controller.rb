@@ -1,6 +1,7 @@
 class OrdersController < MethodsController
   before_action :set_order, only: [:show, :edit, :destroy, :update]
   before_action :typehead, expect: [:index, :create, :update, :destroy, :history, :stats]
+  before_action :products_typehead, only: [:new, :edit]
 
   def index
     orders_collects_calls
@@ -104,5 +105,9 @@ class OrdersController < MethodsController
     def set_order
       @order = Order.find(params[:id])
       @restaurants = Restaurant.all
+    end
+
+    def products_typehead
+      @products_typehead = Product.select(:name).distinct.map(&:name)
     end
 end

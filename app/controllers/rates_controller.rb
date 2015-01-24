@@ -81,8 +81,4 @@ class RatesController < MethodsController
         restaurant.rates.where(user_id: current_user.id).present? ? @restaurants_rated << restaurant : @restaurants_to_rate << restaurant
       end
     end
-
-    # def find_rate
-    #   product.rates.where(user_id: current_user.id)
-    # end
 end

@@ -4,9 +4,7 @@
 = fa_icon "star"
 = activity.owner.name
 %strong rated
-- if activity.trackable and activity.trackable.product
-  = link_to "#{activity.trackable.product.name}" , activity.trackable
-- elsif activity.trackable and activity.trackable.restaurant
-  = link_to "#{activity.trackable.restaurant.name}" , activity.trackable
+- if activity.trackable
+  = show_item_in_public_activity(activity.trackable) + "."
 - else
   something which has been destroyed.

@@ -3,8 +3,8 @@
 %br
 = fa_icon "refresh"
 = activity.owner.name
-%strong updated order containing
+%strong updated rate of
 - if activity.trackable
-  = link_to "#{show_products(activity.trackable)}." , activity.trackable
+  = show_item_in_public_activity(activity.trackable) + "."
 - else
   something which has been destroyed.
