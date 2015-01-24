@@ -1,11 +1,11 @@
 .modal-header
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
   %h1
-    = rate.new_record? ? "New rate" : "Edit #{rate.id}"
+    = rate.new_record? ? "New rate" : "Edit rate ##{rate.id}"
 = simple_form_for rate, class: 'clearfix', remote: true do |f|
   .modal-body
-    = f.input :score, label: 'Score', collection: Rate::Scores, required: false
-    = f.input :comment
+    = f.input :score, label: 'Score', collection: Rate::Scores, required: false, input_html: { value: f.object.score.to_i || nil }
+    = f.input :comment, input_html: { value: f.object.comment || nil }
     = f.input :product_id, collection: @products_to_rate, input_html: { value: params[:id] }, as: :hidden if @products_to_rate.present?
     = f.input :restaurant_id, collection: @restaurants_to_rate, input_html: { value: params[:id] }, as: :hidden if @restaurants_to_rate.present?
   .modal-footer

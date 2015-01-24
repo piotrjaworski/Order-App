@@ -61,7 +61,7 @@ class RatesController < MethodsController
   private
 
     def rate_params
-      params.require(:rate).permit(:score, :user_id, :restaurant_id, :product_id, :commnent)
+      params.require(:rate).permit(:score, :user_id, :restaurant_id, :product_id, :commment)
     end
 
     def set_rate
