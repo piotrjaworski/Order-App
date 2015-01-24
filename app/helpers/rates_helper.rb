@@ -7,4 +7,8 @@ module RatesHelper
   def user_rate(object)
     rate = object.rates.where(user_id: current_user.id).first.score
   end
+
+  def find_rate(object)
+    object.rates.where(user_id: current_user.id).first.id
+  end
 end

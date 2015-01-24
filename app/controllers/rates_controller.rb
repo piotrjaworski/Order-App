@@ -1,6 +1,7 @@
 class RatesController < MethodsController
-  before_action :set_rate, only: [:edit]
+  before_action :set_rate, only: [:edit, :update]
   before_action :typehead, only: [:create, :update, :rate_products, :rate_restaurants]
+  # helper_method :find_rate
 
   def new_product_rate
     @rate = Rate.new
@@ -18,11 +19,11 @@ class RatesController < MethodsController
     @rate = current_user.rates.build(rate_params)
     if @rate.save
       @rate.create_activity :create, owner: current_user
-        products_to_rate
-      restaurants_to_rate
       if @rate.product_id.present?
+        products_to_rate
         render :hide_form_product
-      elsif @rate.restaurant_id.present?
+      else
+        restaurants_to_rate
         render :hide_form_restaurant
       end
     else
@@ -35,6 +36,18 @@ class RatesController < MethodsController
   end
 
   def update
+    if @rate.save
+      @rate.create_activity :update, owner: current_user
+      if @rate.product_id.present?
+        @rate.update_attributes(rate_params)
+        products_to_rate
+        render :hide_form_product
+      else
+        @rate.update_attributes(rate_params)
+        restaurants_to_rate
+        render :hide_form_restaurant
+      end
+    end
   end
 
   def rate_products
@@ -56,26 +69,20 @@ class RatesController < MethodsController
     end
 
     def products_to_rate
-      @products_to_rate = []
-      @products_rated = []
-      current_user.orders.each do |order|
-        order.products.each do |product|
-          @products_to_rate << product if product.rates.where(user_id: current_user.id).empty?
-          @products_rated << product if product.rates.where(user_id: current_user.id).present?
-        end
+      @products_to_rate, @products_rated = [], []
+      current_user.products.each do |product|
+        product.rates.where(user_id: current_user.id).present? ? @products_rated << product : @products_to_rate << product
       end
-      @products_to_rate = @products_to_rate.uniq { |p| p.name }
-      @products_rated = @products_rated.uniq { |p| p.name }
     end
 
     def restaurants_to_rate
-      @restaurants_to_rate = current_user.restaurants
-      @restaurants_rated = current_user.restaurants
-      # current_user.orders.each do |order|
-      #   @restaurants_to_rate << order.restaurant if order.restaurant.rates.where(user_id: current_user.id).empty?
-      #   @restaurants_rated << order.restaurant if order.restaurant.rates.where(user_id: current_user.id).present?
-      # end
-      # @restaurants_to_rate = @restaurants_to_rate.uniq { |r| r.name }
-      # @restaurants_rated = @restaurants_rated.uniq { |r| r.name }
+      @restaurants_to_rate, @restaurants_rated = [], []
+      current_user.restaurants.each do |restaurant|
+        restaurant.rates.where(user_id: current_user.id).present? ? @restaurants_rated << restaurant : @restaurants_to_rate << restaurant
+      end
     end
+
+    # def find_rate
+    #   product.rates.where(user_id: current_user.id)
+    # end
 end

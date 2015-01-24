@@ -98,7 +98,7 @@ class OrdersController < MethodsController
   private
 
     def order_params
-      params.require(:order).permit(:short_info, :restaurant_id, {:products_attributes => [:name, :price]})
+      params.require(:order).permit(:short_info, :restaurant_id, { products_attributes: [:name, :price] })
     end
 
     def set_order

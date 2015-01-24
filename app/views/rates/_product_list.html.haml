@@ -55,6 +55,6 @@
                   = fa_icon("star")
               - if user_signed_in?
                 %td.span1
-                  = link_to '#', remote: true do
+                  = link_to edit_rate_path(find_rate(product)), remote: true do
                     = fa_icon "thumbs-up"
 
