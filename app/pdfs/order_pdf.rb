@@ -2,7 +2,7 @@ class OrderPdf < Prawn::Document
 
   def initialize(today_orders)
     super(top_margin: 70)
-    @today_orders = today_orders
+    @orders = today_orders
     all_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     date = DateTime.now
     text date.strftime("Order from %F"), style: :bold
@@ -27,7 +27,7 @@ class OrderPdf < Prawn::Document
 
   def line_item_rows
     [["ID", "Order", "Who ordered", "Restaurant", "Price"]] +
-    @today_orders.map do |order|
+    @orders.map do |order|
       if order.restaurant
         [order.id, order.products.map(&:name).join(", "), order.user.name, order.restaurant.name, order.products.map(&:price).inject(:+)]
       else

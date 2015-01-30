@@ -53,4 +53,4 @@
                     = fa_icon "edit"
                   = link_to order_path(order), remote: true, method: :delete, data: { confirm: "Are you sure to delete #{order.short_info}?"} do
                     = fa_icon "trash-o"
-    %h4.text-right.price-total= "<span class='total'>To pay: </span>".html_safe + number_to_currency(count_total_price(@today_orders), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
+    %h4.text-right.price-total= "<span class='total'>To pay: </span>".html_safe + number_to_currency(count_total_price(orders), unit: "zł", separator: ",", delimiter: "", format: "%n %u")

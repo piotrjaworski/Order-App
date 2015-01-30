@@ -5,7 +5,7 @@
   = render partial: 'shared/flash_messages', flash: flash
 #order-list
   - if user_signed_in?
-    = render partial: 'order_list', locals: { orders: @today_orders }
+    = render partial: 'order_list', locals: { orders: @orders }
   - else
     = render partial: 'welcome_page'
 #buttons.container

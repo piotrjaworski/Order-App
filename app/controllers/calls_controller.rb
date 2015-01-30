@@ -9,7 +9,7 @@ class CallsController < MethodsController
     @call = current_user.calls.build(call_params)
     orders_collects_calls
     if @call.save
-      @today_orders.each { |order| order.update_attributes(ordered: true) }
+      @orders.each { |order| order.update_attributes(ordered: true) }
       @call.create_activity :create, owner: current_user
       flash.now[:success] = "Thank you for calling!"
       render :hide_form

@@ -11,12 +11,13 @@ class OrdersController < MethodsController
 
     respond_to do |format|
       format.html
+      format.js
       format.pdf do
-        if @today_orders.empty?
+        if @orders.empty?
           pdf = EmptyErrorPdf.new
           send_data pdf.render, filename: "No_orders_raport.pdf", type: "application/pdf", disposition: "inline"
         else
-          pdf = OrderPdf.new(@today_orders)
+          pdf = OrderPdf.new(@orders)
           send_data pdf.render, filename: "Today_orders_raport.pdf", type: "application/pdf", disposition: "inline"
         end
       end

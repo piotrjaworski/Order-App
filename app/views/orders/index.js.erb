@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  $('#order-list').html('<%= j(render partial: 'order_list', locals: { orders: @orders })%>');
+  $('#buttons').html('<%= j(render partial: 'shared/buttons')%>');
+<% else %>
+  $('#order-list').html('<%= j(render partial: 'welcome_page')%>');
+<% end %>
