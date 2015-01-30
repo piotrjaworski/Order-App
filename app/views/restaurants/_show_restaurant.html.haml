@@ -13,6 +13,9 @@
     %span.bold Type:
     = restaurant.try(:restaurant_type)
   %p
+    %span.bold Average Rate:
+    = restaurant.average_rate
+  %p
     %span.bold Address:
     = restaurant.try(:address)
     %br

@@ -15,6 +15,16 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :password_confirmation, presence: true
 
+  class << self
+    def current_user=(user)
+      Thread.current[:current_user] = user
+    end
+
+    def current_user
+      Thread.current[:current_user]
+    end
+  end
+
   def restaurants_added
     Restaurant.where(creator_id: self.id).count
   end
@@ -41,5 +51,4 @@ class User < ActiveRecord::Base
       @user = user
     end
   end
-
 end

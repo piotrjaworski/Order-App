@@ -11,6 +11,7 @@
             %th.span3 Short info
             %th.span2 Type
             %th.span1 Orders
+            %th.span1 Avg. Rate
             - if user_signed_in?
               %th.span1 Actions
         %tbody
@@ -24,6 +25,7 @@
               %td.span3= restaurant.try(:short_info)
               %td.span2= restaurant.try(:restaurant_type)
               %td.span1= restaurant.try(:orders).count
+              %td.span1= restaurant.average_rate
               - if user_signed_in?
                 %td.span1
                   = link_to restaurant_path(restaurant), remote: true do

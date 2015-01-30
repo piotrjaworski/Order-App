@@ -4,12 +4,15 @@
       %p.text-center
         %span.text-warning There are no restaurant!
     - else
+      %h1.text-center Products list
+      %br
       %table.table.table-bordered.table-striped.table-hover
         %thead
           %tr
             %th.span2 Name
             %th.span3 Restaurant
             %th.span2 Price
+            %th.spna2 Average rate
         %tbody
           - @products.each do |product|
             %tr
@@ -17,6 +20,8 @@
               %td.span3= product.try(:restaurant).try(:name)
               %td.span2
                 = number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
+              %td.span2
+                = product.average_rate
     .row
       .text-center.pagination
         = will_paginate @products, renderer: BootstrapPagination::Rails, previous_label: "← Next", next_label: "Previous →"

@@ -12,7 +12,7 @@ class Call < ActiveRecord::Base
   end
 
   def unorder
-    Order.last.destroy
+    current_user.order.last.destroy
   end
 
 end

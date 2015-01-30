@@ -1,8 +1,12 @@
 #rate_restaurants
   .container
     - if @restaurants_to_rate.empty?
-      %p.text-center
-        %span.text-warning There are no restaurants available to rate!
+      .row
+        .span6.offset3
+          .alert.alert-info.text-center
+            %button.close{"data-dismiss" => "alert", :type => "button"} &times;
+            %strong Opsss...
+            There are no available restaurants to rate for now!
     - else
       %h1.text-center.header-padding Restaurants to rate
       %table.table.table-bordered.table-striped.table-hover
@@ -20,11 +24,7 @@
               %td.span2= restaurant.try(:name)
               %td.span3= restaurant.try(:short_info)
               %td.span2= restaurant.try(:restaurant_type)
-              %td.span1
-                - if rate(restaurant).nil?
-                  Not rated yet
-                - else
-                  = rate(restaurant)
+              %td.span1= restaurant.average_rate
               - if user_signed_in?
                 %td.span1
                   = link_to new_restaurant_rate_path(restaurant), remote: true do
@@ -47,14 +47,9 @@
               %td.span2= restaurant.name
               %td.span2= restaurant.short_info
               %td.span2= restaurant.restaurant_type
+              %td.span1= restaurant.average_rate
+              %td.span1= restaurant.user_rate
               %td.span1
-                - for i in 1..rate(restaurant).to_i
-                  = fa_icon("star")
-              %td.span1
-                - for i in 1..user_rate(restaurant).to_i
-                  = fa_icon("star")
-              - if user_signed_in?
-                %td.span1
-                  = link_to edit_rate_path(find_rate(restaurant)), remote: true do
-                    = fa_icon "thumbs-up"
+                = link_to edit_rate_path(find_rate(restaurant)), remote: true do
+                  = fa_icon "edit"
 

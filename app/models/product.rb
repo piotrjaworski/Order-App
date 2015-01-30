@@ -13,5 +13,24 @@ class Product < ActiveRecord::Base
     where("name like ?", "%#{query}%")
   end
 
+  def average_rate
+    rates = self.rates.pluck(:score).inject(:+).to_i
+    if self.rates.present?
+      ("<i class='fa fa-star'></i>" * rates).html_safe
+    else
+      "Not rated"
+    end
+  end
+
+  def user_rate
+    rate = self.rates.where(user_id: User.current_user.id)
+    score = rate.present? ? rate.first.score.to_i : 0
+    if score > 0
+      ("<i class='fa fa-star'></i>" * score).html_safe
+    else
+      "Not rated"
+    end
+  end
+
 end
 

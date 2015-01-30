@@ -1,8 +1,12 @@
 #products-list
   .container
     - if @products_to_rate.empty?
-      %p.text-center
-        %span.text-warning There are no products available to rate!
+      .row
+        .span6.offset3
+          .alert.alert-info.text-center
+            %button.close{"data-dismiss" => "alert", :type => "button"} &times;
+            %strong Opsss...
+            There are no available products to rate for now!
     - else
       %h1.text-center.header-padding Products to rate
       %table.table.table-bordered.table-striped.table-hover
@@ -20,11 +24,7 @@
               %td.span2= product.try(:name)
               %td.span3= number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
               %td.span2= product.try(:restaurant).try(:name)
-              %td.span1
-                - if rate(product).nil?
-                  Not rated yet
-                - else
-                  = rate(product)
+              %td.span1= product.user_rate
               - if user_signed_in?
                 %td.span1
                   = link_to new_product_rate_path(product), remote: true do
@@ -47,14 +47,10 @@
               %td.span2= product.try(:name)
               %td.span2= number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
               %td.span2= product.restaurant.name if product.restaurant
-              %td.span1
-                - for i in 1..rate(product).to_i
-                  = fa_icon("star")
-              %td.span1
-                - for i in 1..user_rate(product).to_i
-                  = fa_icon("star")
+              %td.span1= product.average_rate
+              %td.span1= product.user_rate
               - if user_signed_in?
                 %td.span1
                   = link_to edit_rate_path(find_rate(product)), remote: true do
-                    = fa_icon "thumbs-up"
+                    = fa_icon "edit"
 
