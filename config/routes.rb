@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :calls, only: [:new, :create]
   resources :collects, only: [:create]
   resources :rates, only: [:create, :edit, :update]
-  resources :products, only: [:create, :edit, :update]
+  resources :products, only: [:create, :edit, :update, :show]
 
   get 'rate_products/new/:id', to: 'rates#new_product_rate', as: 'new_product_rate'
   get 'rate_restaurants/new/:id', to: 'rates#new_restaurant_rate', as: 'new_restaurant_rate'

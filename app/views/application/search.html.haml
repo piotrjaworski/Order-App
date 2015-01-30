@@ -5,21 +5,56 @@
     There are no results for searching
     = @search + "."
   - else
-    %h4
+    %h2
       = pluralize(@results.count, "result")
       for
       = @search
       pharse:
     - if @products.present?
       %h4 Products found:
-      %ul
-        - @products.each do |products|
-          %li
-            = products.name
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %tr
+            %th.span2 Name
+            %th.span3 Restaurant
+            %th.span2 Price
+            %th.span2 Average rate
+            %th.span1 Show
+        %tbody
+          - @products.each do |product|
+            %tr
+              %td.span2= product.try(:name)
+              %td.span3= product.try(:restaurant).try(:name)
+              %td.span2= number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
+              %td.span2= product.average_rate
+              %td.span1
+                = link_to product_path(product), remote: true do
+                  = fa_icon "eye"
     - if @restaurants.present?
       %h4 Restaurants found:
-      %ul
-        - @restaurants.each do |restaurant|
-          %li
-            = restaurant.name
-
+      %table.table.table-bordered.table-striped.table-hover
+        %thead
+          %tr
+            %th.span2 Name
+            %th.span3 Short info
+            %th.span2 Type
+            %th.span1 Orders
+            %th.span1 Avg. Rate
+            - if user_signed_in?
+              %th.span1 Actions
+        %tbody
+          - @restaurants.each do |restaurant|
+            %tr
+              %td.span2
+                = restaurant.try(:name)
+                - if user_signed_in?
+                  - if restaurant.creator_id == current_user.id
+                    %span.label.label-success Your added this
+              %td.span3= restaurant.try(:short_info)
+              %td.span2= restaurant.try(:restaurant_type)
+              %td.span1= restaurant.try(:orders).count
+              %td.span1= restaurant.average_rate
+              %td.span1
+                = link_to restaurant_path(restaurant), remote: true do
+                  = fa_icon "eye"
+#modal.modal.fade

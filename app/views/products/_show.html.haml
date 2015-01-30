@@ -1,0 +1,38 @@
+.modal-header
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+  %h1
+    = product.try(:name)
+.modal-body
+  %p
+    %span.bold Prize:
+    = product.try(:price)
+  %p
+    %span.bold Product's average Rate:
+    = product.average_rate
+  %p
+    %span.bold Restaurant:
+    = product.try(:restaurant).try(:name)
+  %p
+    %span.bold Restaurant's address:
+    = product.try(:restaurant).try(:address)
+  %p
+    %span.bold Restaurant's average rate:
+    = product.try(:restaurant).average_rate
+  %p
+    %span.bold Ordered:
+    = product.orders.count
+    = "time".pluralize(product.orders.count) + "."
+  %p
+    - if product.rates.present?
+      %span.bold Last rates:
+      %br
+      - @last_rates.each do |rate|
+        = rate.user.name
+        gave
+        = rate.show_score
+        = "star".pluralize(rate.score) + "."
+        %br
+
+.modal-footer
+  %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close
+

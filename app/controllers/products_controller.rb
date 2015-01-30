@@ -6,4 +6,9 @@ class ProductsController < MethodsController
     typehead
   end
 
+  def show
+    @product = Product.find(params[:id])
+    @last_rates = @product.rates.limit(5)
+  end
+
 end

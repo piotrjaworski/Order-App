@@ -1,8 +1,12 @@
 #products
   .container
     - if @products.empty?
-      %p.text-center
-        %span.text-warning There are no restaurant!
+      .row
+        .span6.offset3
+          .alert.alert-info.text-center
+            %button.close{"data-dismiss" => "alert", :type => "button"} &times;
+            %strong Opsss...
+            There are no products added yet!
     - else
       %h1.text-center Products list
       %br
@@ -12,16 +16,19 @@
             %th.span2 Name
             %th.span3 Restaurant
             %th.span2 Price
-            %th.spna2 Average rate
+            %th.span2 Average rate
+            %th.span1 Show
         %tbody
           - @products.each do |product|
             %tr
               %td.span2= product.try(:name)
               %td.span3= product.try(:restaurant).try(:name)
-              %td.span2
-                = number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
-              %td.span2
-                = product.average_rate
+              %td.span2= number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
+              %td.span2= product.average_rate
+              %td.span1
+                = link_to product_path(product), remote: true do
+                  = fa_icon "eye"
+
     .row
       .text-center.pagination
         = will_paginate @products, renderer: BootstrapPagination::Rails, previous_label: "← Next", next_label: "Previous →"
