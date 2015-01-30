@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
 
+  match "/404" => "errors#error404", via: [:get, :post, :patch, :delete]
 end

@@ -1,0 +1,9 @@
+.container
+  .row
+    .span10.offset1
+      .hero-unit.text-center
+        %h1 Ops... it's a 404 error!
+        %br
+        %p The page you were looking for doesn't exist.
+        %p You may have mistyped the address or the page may have moved.
+        = link_to "<i class='fa fa-home'></i> Go to the main page".html_safe, root_path, class: 'btn btn-success'

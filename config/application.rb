@@ -16,7 +16,9 @@ module OrderApp
 
     config.time_zone = 'Warsaw'
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    require Rails.root.join("lib/custom_public_exceptions")
+    config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
+
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :en
 
