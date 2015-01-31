@@ -24,7 +24,7 @@
               %td.span2= product.try(:name)
               %td.span3= product.try(:restaurant).try(:name)
               %td.span2= number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
-              %td.span2= product.average_rate
+              %td.span2= average_rate(product)
               %td.span1
                 = link_to product_path(product), remote: true do
                   = fa_icon "info"

@@ -29,7 +29,7 @@
               %td.span3= restaurant.try(:short_info).truncate(40)
               %td.span2= restaurant.try(:restaurant_type)
               %td.span1= restaurant.try(:orders).count
-              %td.span1= restaurant.average_rate
+              %td.span1= average_rate(restaurant)
               - if user_signed_in?
                 %td.span1
                   = link_to restaurant_path(restaurant), remote: true do

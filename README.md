@@ -1,5 +1,7 @@
 ## README
 [ ![Codeship Status for piotrjaworski/Order-App](https://codeship.com/projects/b97953b0-16af-0132-1b16-5e9521f3a2db/status)](https://codeship.com/projects/33934)
+[![Code Climate](https://codeclimate.com/github/piotrjaworski/Order-App/badges/gpa.svg)](https://codeclimate.com/github/piotrjaworski/Order-App)
+[![Test Coverage](https://codeclimate.com/github/piotrjaworski/Order-App/badges/coverage.svg)](https://codeclimate.com/github/piotrjaworski/Order-App)
 # Live on Heroku
 ```bash
 http://zamawiarka.herokuapp.com/

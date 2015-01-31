@@ -8,7 +8,7 @@
     = product.try(:price)
   %p
     %span.bold Product's average Rate:
-    = product.average_rate
+    = average_rate(product)
   %p
     %span.bold Restaurant:
     = product.try(:restaurant).try(:name)
@@ -17,7 +17,7 @@
     = product.try(:restaurant).try(:address)
   %p
     %span.bold Restaurant's average rate:
-    = product.try(:restaurant).average_rate
+    = average_rate(product.try(:restaurant))
   %p
     %span.bold Ordered:
     = product.orders.count
