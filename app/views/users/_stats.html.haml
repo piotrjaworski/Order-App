@@ -19,5 +19,5 @@
         = @user.orders.present? ? @user.orders.last.created_at.strftime("%d/%m/%Y at %H:%M") : "-"
     %tr
       %td
-        %strong Total spend:
+        %strong Total spent:
       %td= @user.orders.present? ? number_to_currency(count_total_price(@user.orders), unit: "zł", separator: ",", delimiter: "", format: "%n %u") : number_to_currency((0), unit: "zł", separator: ",", delimiter: "", format: "%n %u")

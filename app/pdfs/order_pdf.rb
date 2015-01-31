@@ -1,3 +1,4 @@
+#encoding: utf-8
 class OrderPdf < Prawn::Document
 
   def initialize(today_orders)
@@ -5,14 +6,14 @@ class OrderPdf < Prawn::Document
     @orders = today_orders
     all_orders = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day)
     date = DateTime.now
-    text date.strftime("Order from %F"), style: :bold
+    text date.strftime("Order from %F."), style: :bold
     line_items
     move_down 14
     fill_color "ff0000"
     text "Total to pay: " + count_total_price(all_orders).to_s + " zl", size: 18, style: :bold
     move_down 20
     fill_color "0000ff"
-    text date.strftime("Raport generated at %F %I:%M%p"), size: 10
+    text date.strftime("Raport generated on %F at %I:%M%p."), size: 10
   end
 
   def line_items
