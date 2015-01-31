@@ -3,7 +3,7 @@
 - if user_signed_in?
   .centered
     .button-add
-      = button_to 'Add new restaurant', new_restaurant_path, method: :get, class: 'btn btn-primary', remote: true
+      = button_to 'Add a new restaurant', new_restaurant_path, method: :get, class: 'btn btn-primary', remote: true
 - else
   .centered
     %h3 Please login if you want to add new one or show existing.

@@ -10,7 +10,7 @@
     - else
       %h1.text-center Products list
       %br
-      %table.table.table-bordered.table-striped.table-hover
+      %table.table.table-bordered.table-hover
         %thead
           %tr
             %th.span2 Name
@@ -27,7 +27,7 @@
               %td.span2= product.average_rate
               %td.span1
                 = link_to product_path(product), remote: true do
-                  = fa_icon "eye"
+                  = fa_icon "info"
 
     .row
       .text-center.pagination

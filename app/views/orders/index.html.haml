@@ -1,7 +1,7 @@
 #header-main
   - if user_signed_in?
     = render partial: 'header'
-#flash-messages.container
+#flash-messages
   = render partial: 'shared/flash_messages', flash: flash
 #order-list
   - if user_signed_in?

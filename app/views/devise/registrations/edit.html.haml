@@ -11,7 +11,7 @@
             %br
             %br
         .form-inputs
-          - if current_user.photo
+          - if current_user.uid
             = image_tag(avatar_url(current_user), size: "100x100", class: 'border-photo')
             %br
             %br
@@ -27,8 +27,8 @@
               %a{:href => "http://gravatar.com", target: "blank"} gravatar.com
           %br
           - if current_user.provider == "facebook"
-            = f.input :name, required: false, readonly: true, hint: "You can't change name if you connected your account with Facebook"
-            = f.input :email, required: false, readonly: true, hint: "You can't change email if you connected your account with Facebook"
+            = f.input :name, required: false, readonly: true, hint: "You can't change name if you connected your account with Facebook."
+            = f.input :email, required: false, readonly: true, hint: "You can't change email if you connected your account with Facebook."
           - else
             = f.input :name, required: false, autofocus: true
             = f.input :email, required: false

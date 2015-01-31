@@ -11,8 +11,13 @@ class Rate < ActiveRecord::Base
 
   def show_score
     score = self.score.to_i
+    difference = 5 - score
     if score > 0
-      ("<i class='fa fa-star'></i>" * score).html_safe
+      if difference > 0
+        ("<i class='fa fa-star'></i>" * score + "<i class='fa fa-star-o'></i>" * difference).html_safe
+      else
+        ("<i class='fa fa-star'></i>" * score).html_safe
+      end
     else
       "Not rated"
     end

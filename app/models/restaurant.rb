@@ -28,8 +28,13 @@ class Restaurant < ActiveRecord::Base
 
   def average_rate
     rates = self.rates.pluck(:score).inject(:+).to_i
+    difference = 5 - rates
     if self.rates.present?
-      ("<i class='fa fa-star'></i>" * rates).html_safe
+      if difference > 0
+        ("<i class='fa fa-star'></i>" * rates + "<i class='fa fa-star-o'></i>" * difference).html_safe
+      else
+        ("<i class='fa fa-star'></i>" * rates).html_safe
+      end
     else
       "Not rated"
     end
@@ -38,8 +43,13 @@ class Restaurant < ActiveRecord::Base
   def user_rate
     rate = self.rates.where(user_id: User.current_user.id)
     score = rate.present? ? rate.first.score.to_i : 0
+    difference = 5 - score
     if score > 0
-      ("<i class='fa fa-star'></i>" * score).html_safe
+      if difference > 0
+        ("<i class='fa fa-star'></i>" * score + "<i class='fa fa-star-o'></i>" * difference).html_safe
+      else
+        ("<i class='fa fa-star'></i>" * score).html_safe
+      end
     else
       "Not rated"
     end

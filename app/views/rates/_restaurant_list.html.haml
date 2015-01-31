@@ -9,7 +9,7 @@
             There are no available restaurants to rate for now!
     - else
       %h1.text-center.header-padding Restaurants to rate
-      %table.table.table-bordered.table-striped.table-hover
+      %table.table.table-bordered.table-hover
         %thead
           %tr
             %th.span2 Name
@@ -31,7 +31,7 @@
                     = fa_icon "thumbs-up"
     - if @restaurants_rated.present?
       %h1.text-center.header-padding Restaurants rated by you
-      %table.table.table-bordered.table-striped.table-hover
+      %table.table.table-bordered.table-hover
         %thead
           %tr
             %th.span2 Name
@@ -44,9 +44,9 @@
         %tbody
           - @restaurants_rated.each do |restaurant|
             %tr
-              %td.span2= restaurant.name
-              %td.span2= restaurant.short_info
-              %td.span2= restaurant.restaurant_type
+              %td.span2= restaurant.try(:name)
+              %td.span2= restaurant.try(:short_info).truncate(35)
+              %td.span2= restaurant.try(:restaurant_type)
               %td.span1= restaurant.average_rate
               %td.span1= restaurant.user_rate
               %td.span1

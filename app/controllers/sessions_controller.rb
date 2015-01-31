@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     @user = User.facebook_login(auth)
     sign_in @user
     redirect_to root_path
-    flash.now[:success] = "Successfully logged in via Facebook!"
+    flash[:success] = "Successfully logged in via Facebook!"
   end
 
 end

@@ -8,7 +8,7 @@
             %strong Opsss...
             There are no restaurants added yet!
     - else
-      %table.table.table-bordered.table-striped.table-hover
+      %table.table.table-bordered.table-hover
         %thead
           %tr
             %th.span2 Name
@@ -25,8 +25,8 @@
                 = restaurant.try(:name)
                 - if user_signed_in?
                   - if restaurant.creator_id == current_user.id
-                    %span.label.label-success Your added this
-              %td.span3= restaurant.try(:short_info)
+                    %span.label.label-success You added
+              %td.span3= restaurant.try(:short_info).truncate(40)
               %td.span2= restaurant.try(:restaurant_type)
               %td.span1= restaurant.try(:orders).count
               %td.span1= restaurant.average_rate

@@ -21,8 +21,7 @@
               = index
               %br
               %strong Rate:
-              - for i in 1..rate.score.to_i
-                = fa_icon("star")
+              = rate.show_score
               %br
               - if rate.product
                 %strong Product:

@@ -1,9 +1,13 @@
 .container
   - if orders.empty?
-    %p.text-center
-      %span.text-warning There are no orders!
+    .row
+      .span6.offset3
+        .alert.alert-info.text-center
+          %button.close{"data-dismiss" => "alert", :type => "button"} &times;
+          %strong Opsss...
+          There are no products added yet!
   - else
-    %table.table.table-bordered.table-striped.table-hover
+    %table.table.table-bordered.table-hover
       %thead
         %tr
           %th.span3 Order
