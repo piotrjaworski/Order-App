@@ -29,7 +29,7 @@
       - @last_rates.each do |rate|
         = rate.user.name
         gave
-        = rate.show_score
+        = rate_score(rate)
         = "star".pluralize(rate.score) + "."
         %br
 

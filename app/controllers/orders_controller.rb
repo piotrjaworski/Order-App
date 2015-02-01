@@ -5,20 +5,18 @@ class OrdersController < MethodsController
 
   def index
     orders_collects_calls
-    if user_signed_in?
-      @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1
-    end
+    @your_order = current_user.orders.where("created_at >= ?", Time.zone.now.beginning_of_day).length >= 1 if user_signed_in?
 
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-        if @orders.empty?
-          pdf = EmptyErrorPdf.new
-          send_data pdf.render, filename: "No_orders_raport.pdf", type: "application/pdf", disposition: "inline"
-        else
+        if @orders.present?
           pdf = OrderPdf.new(@orders)
           send_data pdf.render, filename: "Today_orders_raport.pdf", type: "application/pdf", disposition: "inline"
+        else
+          redirect_to root_path
+          flash[:error] = "You cannot generate raport without orders!"
         end
       end
     end

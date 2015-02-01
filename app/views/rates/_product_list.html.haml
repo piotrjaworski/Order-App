@@ -1,6 +1,6 @@
 #products-list
   .container
-    - if @products_to_rate.empty?
+    - if @to_rate.empty?
       .row
         .span6.offset3
           .alert.alert-info.text-center
@@ -19,7 +19,7 @@
             - if user_signed_in?
               %th.span1 Add Rate
         %tbody
-          - @products_to_rate.each do |product|
+          - @to_rate.each do |product|
             %tr
               %td.span2= product.try(:name)
               %td.span3= number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")
@@ -29,7 +29,7 @@
                 %td.span1
                   = link_to new_product_rate_path(product), remote: true do
                     = fa_icon "thumbs-up"
-    - if @products_rated.present?
+    - if @rated.present?
       %h1.text-center.header-padding Products rated by you
       %table.table.table-bordered.table-hover
         %thead
@@ -42,7 +42,7 @@
             - if user_signed_in?
               %th.span1 Edit Rate
         %tbody
-          - @products_rated.each do |product|
+          - @rated.each do |product|
             %tr
               %td.span2= product.try(:name)
               %td.span2= number_to_currency(product.try(:price), unit: "zł", separator: ",", delimiter: "", format: "%n %u")

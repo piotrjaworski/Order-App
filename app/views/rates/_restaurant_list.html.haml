@@ -1,6 +1,6 @@
 #rate_restaurants
   .container
-    - if @restaurants_to_rate.empty?
+    - if @to_rate.empty?
       .row
         .span6.offset3
           .alert.alert-info.text-center
@@ -19,7 +19,7 @@
             - if user_signed_in?
               %th.span1 Add Rate
         %tbody
-          - @restaurants_to_rate.each do |restaurant|
+          - @to_rate.each do |restaurant|
             %tr
               %td.span2= restaurant.try(:name)
               %td.span3= restaurant.try(:short_info)
@@ -29,7 +29,7 @@
                 %td.span1
                   = link_to new_restaurant_rate_path(restaurant), remote: true do
                     = fa_icon "thumbs-up"
-    - if @restaurants_rated.present?
+    - if @rated.present?
       %h1.text-center.header-padding Restaurants rated by you
       %table.table.table-bordered.table-hover
         %thead
@@ -42,7 +42,7 @@
             - if user_signed_in?
               %th.span1 Edit Rate
         %tbody
-          - @restaurants_rated.each do |restaurant|
+          - @rated.each do |restaurant|
             %tr
               %td.span2= restaurant.try(:name)
               %td.span2= restaurant.try(:short_info).truncate(35)
