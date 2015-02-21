@@ -1,6 +1,4 @@
-
 password = 'passwd1234'
-
 puts "Creating fake users..."
 
 for i in 1..30

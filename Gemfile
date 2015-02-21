@@ -26,7 +26,6 @@ gem 'groupdate'
 gem 'activeadmin', github: 'activeadmin'
 gem 'public_activity'
 gem 'rails-timeago', '~> 2.0'
-gem 'faker'
 
 group :development do
   gem 'better_errors'
@@ -36,12 +35,11 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'faker'
 end
 
 gem 'rails_12factor', group: :production
-
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 gem 'therubyracer', platforms: :ruby
 
 # Use ActiveModel has_secure_password
